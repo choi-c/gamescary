@@ -1,0 +1,23 @@
+DATA FILE
+.csv = school.csv
+1 seeker, 2 hiders (2 skins to choose from for each)
+- each skin gives them a different powerup (seeker)
+    - eyeball monster: see 9x9
+    - other monster: see 7x7, run faster (trust the process)
+button to tag
+chat box
+dimensions: 1280 x 720 (40x40px block size, 32x32 blocks chat box on the side)
+black, white, red (blood) colour theme
+
+F: floor
+W: wall
+L: locker
+T: table
+C: chair
+P: principal (any square around the P, all power-ups gone)
+
+Requirements:
+power-ups, random
+- row or column, if theres a table, generate new random row or column
+only see around you a certain number of blocks (flashlight, fog), or
+(limited screen) 
