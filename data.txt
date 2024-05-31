@@ -15,6 +15,7 @@ L: locker
 T: table
 C: chair
 P: principal (any square around the P, all power-ups gone)
+s: ceiling supports (pillar)
 
 Requirements:
 power-ups, random

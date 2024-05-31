@@ -1,19 +1,13 @@
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
-import java.util.Timer.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.image.*;
 
 public class school{
     // Properties
-    JFrame theframe;
-    animationpanel schoolPanel = new animationpanel();
-    Timer thetimer;
 
     // Methods
 
     // Constructor
-    public static void main(String[] args){
-        new school();
-    }
+    
+
 }
