@@ -4,6 +4,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.io.*;
 import java.awt.image.*;
 
 public class scary implements ActionListener{
@@ -15,6 +16,9 @@ public class scary implements ActionListener{
     JPanel characterPanel;
     JButton connectb,tagb;
     JTextField ip,port,name;
+    JLabel yourSide,teamSide;
+    BufferedImage yourPlayer1,yourPlayer2,teamPlayer1,teamPlayer2;
+    JButton yourChoice1,yourChoice2,teamChoice1,teamChoice2;
     
     //SuperSocketMaster ssm;
     BufferedImage imgHome;
@@ -24,7 +28,7 @@ public class scary implements ActionListener{
         if(evt.getSource() == connectb){
             System.out.println(name.getText());
             if(ip.getText() != null && port.getText() != null){
-                frame.setContentPane(panel);
+                frame.setContentPane(characterPanel);
                 frame.validate();
             } else{
                 System.out.println("Enter ip, port number and/or name to connect");
@@ -73,7 +77,39 @@ public class scary implements ActionListener{
         characterPanel.setLayout(null);
         characterPanel.setPreferredSize(new Dimension(1280, 720));
 
-         
+        yourSide = new JLabel("Your Character");
+        yourSide.setSize(640,100);
+        yourSide.setLocation(0,0);
+        characterPanel.add(yourSide);
+
+        teamSide = new JLabel("Other Player's Character");
+        teamSide.setSize(640,100);
+        teamSide.setLocation(640,0);
+        characterPanel.add(teamSide);
+
+        yourChoice1 = new JButton("1");
+        yourChoice1.setSize(160,267);
+        yourChoice1.setLocation(133,80);
+        yourChoice1.addActionListener(this);
+        characterPanel.add(yourChoice1);
+
+        yourChoice2 = new JButton("2");
+        yourChoice2.setSize(160,267);
+        yourChoice2.setLocation(400,133);
+        yourChoice2.addActionListener(this);
+        characterPanel.add(yourChoice2);
+
+        teamChoice1 = new JButton("1");
+        teamChoice1.setSize(160,267);
+        teamChoice1.setLocation(133,720);
+        teamChoice1.addActionListener(this);
+        characterPanel.add(teamChoice1);
+
+        teamChoice2 = new JButton("2");
+        teamChoice2.setSize(160,267);
+        teamChoice2.setLocation(133,1040);
+        teamChoice2.addActionListener(this);
+        characterPanel.add(teamChoice2);
 
         panel = new JPanel();
         panel.setLayout(null);
