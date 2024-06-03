@@ -10,8 +10,10 @@ public class scary implements ActionListener{
     JPanel panel;
     JTextArea chat = new JTextArea();
     JPanel startPanel;
+    JPanel characterPanel;
     JButton connectb,tagb;
     JTextField ip,port,name;
+    
     //SuperSocketMaster ssm;
 
     // Methods
@@ -24,8 +26,7 @@ public class scary implements ActionListener{
             } else{
                 System.out.println("Enter ip, port number and/or name to connect");
             }
-        }
-        
+        }    
     }
 
     // Constructor
@@ -56,6 +57,13 @@ public class scary implements ActionListener{
         connectb.addActionListener(this);
         startPanel.add(connectb);
         
+        // character select panel (only for players)
+        characterPanel = new JPanel();
+        characterPanel.setLayout(null);
+        characterPanel.setPreferredSize(new Dimension(1280, 720));
+
+         
+
         panel = new JPanel();
         panel.setLayout(null);
 
