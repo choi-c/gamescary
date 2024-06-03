@@ -10,12 +10,14 @@ public class scary implements ActionListener{
     JPanel panel;
     JTextArea chat = new JTextArea();
     JPanel startPanel;
-    JButton connectb;
+    JButton connectb,tagb;
     JTextField ip,port,name;
+    //SuperSocketMaster ssm;
 
     // Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == connectb){
+            System.out.println(name.getText());
             if(ip.getText() != null && port.getText() != null){
                 frame.setContentPane(panel);
                 frame.validate();
@@ -38,12 +40,15 @@ public class scary implements ActionListener{
         // adding text fields for ip, port number and user name
         ip = new JTextField();
         ip.setBounds(50,300,200,100);
+        ip.setText(null);
         startPanel.add(ip);
         port = new JTextField();
         port.setBounds(50,450,200,100);
+        port.setText(null);
         startPanel.add(port);
-        name = new JTextField();
+        name = new JTextField(null);
         name.setBounds(50,600,200,100);
+        //name.setText(null);
         startPanel.add(name);
 
         connectb = new JButton("Connect");
@@ -56,6 +61,9 @@ public class scary implements ActionListener{
 
         chat.setBounds(920,0,720,1280);
         panel.add(chat);
+
+        tagb = new JButton("Tag");
+        //tagb.setBounds()
       
         frame.setContentPane(startPanel);
         frame.pack();
