@@ -3,6 +3,10 @@ import javax.imageio.*;
 import java.awt.image.*;
 
 public class animationpanel {
+    public static String[][] map(){
+        String map[][];
+        
+    }
     // Properties
     BufferedImage imgFloor = null, imgSupport = null, imgTable = null, imgChair = null;
 
