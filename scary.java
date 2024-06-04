@@ -1,12 +1,9 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.awt.image.*;
 import javax.imageio.*;
-import java.io.*;
 
 public class scary implements ActionListener{
     // Properties
@@ -16,29 +13,70 @@ public class scary implements ActionListener{
     start startPanel;
     characterselect characterPanel;
     JButton connectb,tagb;
-    JTextField ip,port,name;
-    JLabel yourSide,teamSide;
-    BufferedImage yourPlayer1,yourPlayer2,teamPlayer1,teamPlayer2;
-    JButton yourChoice1,yourChoice2,teamChoice1,teamChoice2, lockIn;
-    
+    JTextField ip = null,port = null,name = null;
+    JLabel seekers,hiders, selectName;
+    JButton char1,char2,char3,char4, lockIn;
+    String strName = null, strSelect;
+
     //SuperSocketMaster ssm;
-    BufferedImage imgHome = null;
 
     // Methods
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == connectb){
-            System.out.println(name.getText());
-            if(ip.getText() != null && port.getText() != null){
+            if(!strName.equals(null)){
+                if(ip.getText() != null && port.getText() != null){
+                    System.out.println("connect as player");
+                }else{
+                    System.out.println("Enter ip, port number and/or name to connect");
+                    System.out.println("connect as not player the other thing");
+                }
+                System.out.println(strName);
                 frame.setContentPane(characterPanel);
                 frame.validate();
-            } else{
-                System.out.println("Enter ip, port number and/or name to connect");
             }
-        }
-        else if(evt.getSource() == lockIn){
+        }else if(evt.getSource() == name){
+            strName = name.getText();
+        }else if(evt.getSource() == char1){
+            char1.setEnabled(false);
+            char2.setEnabled(true);
+            char3.setEnabled(true);
+            char4.setEnabled(true);
+            selectName.setBounds(75,0,200,100);
+            strSelect.equals("seeker1");
+            System.out.println("strSelect");
+            frame.validate();
+        }else if(evt.getSource() == char2){
+            char1.setEnabled(true);
+            char2.setEnabled(false);
+            char3.setEnabled(true);
+            char4.setEnabled(true);
+            selectName.setBounds(380,0,200,100);
+            strSelect.equals("seeker2");
+            System.out.println("strSelect");
+            frame.validate();
+        }else if(evt.getSource() == char3){
+            char1.setEnabled(true);
+            char2.setEnabled(true);
+            char3.setEnabled(false);
+            char4.setEnabled(true);
+            selectName.setBounds(700,0,200,100);
+            strSelect.equals("hider1");
+            System.out.println("strSelect");
+            frame.validate();
+        }else if(evt.getSource() == char4){
+            char1.setEnabled(true);
+            char2.setEnabled(true);
+            char3.setEnabled(true);
+            char4.setEnabled(false);
+            selectName.setBounds(1020,0,200,100);
+            strSelect.equals("hider2");
+            System.out.println("strSelect");
+            frame.validate();
+        }else if(evt.getSource() == lockIn){
+            System.out.println("playing as "+strSelect);
             frame.setContentPane(panel);
             frame.validate();
-        } 
+        }
     }
 
     // Constructor
@@ -53,15 +91,15 @@ public class scary implements ActionListener{
         // adding text fields for ip, port number and user name
         ip = new JTextField();
         ip.setBounds(400,305,200,80);
-        ip.setText(null);
+        ip.addActionListener(this);
         startPanel.add(ip);
         port = new JTextField();
         port.setBounds(400,435,200,80);
-        port.setText(null);
+        port.addActionListener(this);
         startPanel.add(port);
         name = new JTextField(null);
         name.setBounds(400,560,200,80);
-        //name.setText(null);
+        name.addActionListener(this);
         startPanel.add(name);
 
         connectb = new JButton("Connect");
@@ -73,53 +111,44 @@ public class scary implements ActionListener{
         characterPanel = new characterselect();
         characterPanel.setLayout(null);
         characterPanel.setPreferredSize(new Dimension(1280, 720));
+        //selectName stuff doesnt work yet
+        selectName = new JLabel(strName);
+        selectName.setBounds(0,0,200,100);
+        characterPanel.add(selectName);
 
-        yourSide = new JLabel("Seekers");
-        yourSide.setSize(640,100);
-        yourSide.setLocation(300,0);
-        characterPanel.add(yourSide);
+        seekers = new JLabel("Seekers");
+        seekers.setBounds(300,0,640,100);
+        characterPanel.add(seekers);
 
-        teamSide = new JLabel("Hiders");
-        teamSide.setSize(640,100);
-        teamSide.setLocation(965,0);
-        characterPanel.add(teamSide);
+        hiders = new JLabel("Hiders");
+        hiders.setBounds(965,0,640,100);
+        characterPanel.add(hiders);
 
-        yourChoice1 = new JButton("1");
-        yourChoice1.setSize(160,50);
-        yourChoice1.setLocation(80,500);
-        yourChoice1.addActionListener(this);
-        characterPanel.add(yourChoice1);
+        char1 = new JButton("Choose");
+        char1.setBounds(80,500,160,50);
+        char1.addActionListener(this);
+        characterPanel.add(char1);
 
-        yourChoice2 = new JButton("2");
-        yourChoice2.setSize(160,50);
-        yourChoice2.setLocation(400,500);
-        yourChoice2.addActionListener(this);
-        characterPanel.add(yourChoice2);
+        char2 = new JButton("Choose");
+        char2.setBounds(400,500,160,50);
+        char2.addActionListener(this);
+        characterPanel.add(char2);
 
-        teamChoice1 = new JButton("1");
-        teamChoice1.setSize(160,50);
-        teamChoice1.setLocation(720, 500);
-        teamChoice1.addActionListener(this);
-        characterPanel.add(teamChoice1);
+        char3 = new JButton("Choose");
+        char3.setBounds(720,500,160,50);
+        char3.addActionListener(this);
+        characterPanel.add(char3);
 
-        teamChoice2 = new JButton("2");
-        teamChoice2.setSize(160,50);
-        teamChoice2.setLocation(1040,500);
-        teamChoice2.addActionListener(this);
-        characterPanel.add(teamChoice2);
+        char4 = new JButton("Choose");
+        char4.setBounds(1040,500,160,50);
+        char4.addActionListener(this);
+        characterPanel.add(char4);
 
         lockIn = new JButton("LOCK IN");
-        lockIn.setSize(160,50);
-        lockIn.setLocation(560, 600);
+        lockIn.setBounds(560,600,160,50);
         lockIn.addActionListener(this);
         characterPanel.add(lockIn);
         characterPanel.repaint();
-
-        try{
-            yourPlayer1 = ImageIO.read(new File("hider1.png"));
-        }catch(IOException e){
-            System.out.println("Unable to load image");
-        }
 
         // The actual game
         panel = new JPanel();
