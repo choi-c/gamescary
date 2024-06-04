@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.awt.image.*;
+import javax.imageio.*;
+import java.io.*;
 
 public class scary implements ActionListener{
     // Properties
@@ -15,7 +17,7 @@ public class scary implements ActionListener{
     JButton connectb,tagb;
     JTextField ip,port,name;
     //SuperSocketMaster ssm;
-    BufferedImage imgHome;
+    BufferedImage imgHome = null;
 
     // Methods
     public void actionPerformed(ActionEvent evt){
@@ -40,12 +42,17 @@ public class scary implements ActionListener{
         startPanel.setLayout(null);
         startPanel.setPreferredSize(new Dimension(1280,720));
 
+        /*
         // loading home screen image
         try{
             imgHome = ImageIO.read(new File("home.png"));
         }catch(IOException e){
             System.out.println("Unable to load image");
         }
+        startPanel.add(imgHome);
+        startPanel.repaint();
+        */
+        
         
 
         // adding text fields for ip, port number and user name
