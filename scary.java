@@ -80,14 +80,14 @@ public class scary implements ActionListener{
         characterPanel.setLayout(null);
         characterPanel.setPreferredSize(new Dimension(1280, 720));
 
-        yourSide = new JLabel("Your Character");
+        yourSide = new JLabel("Seekers");
         yourSide.setSize(640,100);
-        yourSide.setLocation(275,0);
+        yourSide.setLocation(300,0);
         characterPanel.add(yourSide);
 
-        teamSide = new JLabel("Other Player's Character");
+        teamSide = new JLabel("Hiders");
         teamSide.setSize(640,100);
-        teamSide.setLocation(883,0);
+        teamSide.setLocation(965,0);
         characterPanel.add(teamSide);
 
         yourChoice1 = new JButton("1");
