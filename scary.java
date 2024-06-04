@@ -13,7 +13,7 @@ public class scary implements ActionListener{
     JFrame frame;
     JPanel panel;
     JTextArea chat = new JTextArea();
-    JPanel startPanel;
+    start startPanel;
     characterselect characterPanel;
     JButton connectb,tagb;
     JTextField ip,port,name;
@@ -46,39 +46,26 @@ public class scary implements ActionListener{
         frame = new JFrame("Scary Hide & seek");
 
         // setting up start screen
-        startPanel = new JPanel();
+        startPanel = new start();
         startPanel.setLayout(null);
         startPanel.setPreferredSize(new Dimension(1280,720));
-
-        /*
-        // loading home screen image
-        try{
-            imgHome = ImageIO.read(new File("home.png"));
-        }catch(IOException e){
-            System.out.println("Unable to load image");
-        }
-        startPanel.add(imgHome);
-        startPanel.repaint();
-        */
         
-        
-
         // adding text fields for ip, port number and user name
         ip = new JTextField();
-        ip.setBounds(50,300,200,100);
+        ip.setBounds(400,305,200,80);
         ip.setText(null);
         startPanel.add(ip);
         port = new JTextField();
-        port.setBounds(50,450,200,100);
+        port.setBounds(400,435,200,80);
         port.setText(null);
         startPanel.add(port);
         name = new JTextField(null);
-        name.setBounds(50,600,200,100);
+        name.setBounds(400,560,200,80);
         //name.setText(null);
         startPanel.add(name);
 
         connectb = new JButton("Connect");
-        connectb.setBounds(300,300,300,100);
+        connectb.setBounds(800,550,300,100);
         connectb.addActionListener(this);
         startPanel.add(connectb);
         
