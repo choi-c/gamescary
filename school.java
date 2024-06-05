@@ -28,7 +28,22 @@ public class school extends JPanel{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        
+        g.drawImage(seeker1, 75, 133, 200, 267, null);
+    }
+    public BufferedImage letterImage(String letter){
+        if(letter.equals("c")){
+            return chair;
+        }else if(letter.equals("l")){
+            return locker;
+        }else if(letter.equals("s")){
+            return pillar;
+        }else if(letter.equals("p")){
+            return principal;
+        }else if(letter.equals("t")){
+            return table;
+        }else if(letter.equals("l")){
+            return wall;
+        }
     }
 
     // Constructor
@@ -46,7 +61,7 @@ public class school extends JPanel{
             seeker1 = ImageIO.read(new File("seeker1.png"));
             seeker2 = ImageIO.read(new File("seeker2.png"));
             table = ImageIO.read(new File("table.png"));
-            wall = = ImageIO.read(new File("wall.png"));
+            wall = ImageIO.read(new File("wall.png"));
 
         }catch(IOException e){
             System.out.println("Unable to load image");

@@ -8,7 +8,7 @@ import javax.imageio.*;
 public class scary implements ActionListener, KeyListener{
     // Properties
     JFrame frame;
-    JPanel panel;
+    school panel;
     JTextArea chat = new JTextArea();
     start startPanel;
     characterselect characterPanel;
@@ -90,10 +90,11 @@ public class scary implements ActionListener, KeyListener{
 			
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
 
-        else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
+        }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
 	
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
 
+        }
     }
 
     // Constructor
@@ -168,7 +169,7 @@ public class scary implements ActionListener, KeyListener{
         characterPanel.repaint();
 
         // The actual game
-        panel = new JPanel();
+        panel = new school();
         panel.setLayout(null);
 
         chat.setBounds(920,0,720,1280);
