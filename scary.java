@@ -89,10 +89,11 @@ public class scary implements ActionListener, KeyListener{
 			
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
 
-        else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
+        }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
 	
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
 
+        }
     }
 
     // Constructor
