@@ -12,7 +12,7 @@ black, white, red (blood) colour theme
 F: floor
 W: wall
 L: locker
-T: table
+D: desk
 C: chair
 P: principal (any square around the P, all power-ups gone)
 s: ceiling supports (pillar)
