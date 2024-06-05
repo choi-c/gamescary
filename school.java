@@ -8,6 +8,8 @@ public class school extends JPanel{
     // Properties
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,table,wall = null;
     String[][] strMap = new String[20][20];
+    int playerX = 2;
+    int playerY = 29;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -26,7 +28,7 @@ public class school extends JPanel{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
+        
     }
 
     // Constructor

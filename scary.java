@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.io.*;
 import javax.imageio.*;
 
-public class scary implements ActionListener{
+public class scary implements ActionListener, KeyListener{
     // Properties
     JFrame frame;
     JPanel panel;
@@ -77,6 +77,22 @@ public class scary implements ActionListener{
             frame.setContentPane(panel);
             frame.validate();
         }
+    }
+    public void keyPressed(KeyEvent evt){
+
+    }
+    public void keyReleased(KeyEvent evt){
+
+    }
+    public void keyTyped(KeyEvent evt){
+        if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
+			
+		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
+
+        else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
+	
+		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
+
     }
 
     // Constructor
