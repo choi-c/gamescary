@@ -24,11 +24,12 @@ public class scary implements ActionListener, KeyListener{
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == connectb){
             if(!strName.equals(null)){
-                if(ip.getText() != null && port.getText() != null){
+                if(!ip.getText().equals(null) && !port.getText().equals(null)){
                     System.out.println("connect as player");
+                }else if (ip.getText().equals(null) && !port.getText().equals(null)){
+                    System.out.println("connect as host");
                 }else{
-                    System.out.println("Enter ip, port number and/or name to connect");
-                    System.out.println("connect as not player the other thing");
+                    System.out.println("Enter ip, port, or name");
                 }
                 System.out.println(strName);
                 frame.setContentPane(characterPanel);
