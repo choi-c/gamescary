@@ -28,7 +28,7 @@ public class school extends JPanel{
     public void loadMap(int intPX, int intPY){
         
     }
-
+    // painting the map
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
@@ -45,7 +45,10 @@ public class school extends JPanel{
 		int intCol;
         String strLine = null;
         String strSplit[];
-		for(intRow = 0; intRow < 20; intRow++){
+        int intPX = 0;
+        int intPY = 0;
+
+		for(intRow = intPX-4; intRow < intPX+4; intRow++){
             try{
                 strLine = fileMap.readLine();
             }catch(IOException e){
@@ -61,6 +64,7 @@ public class school extends JPanel{
         }catch(IOException e){
             System.out.println("File not found");
         }
+
 
         //g.drawImage(hider1, intX, intY, 80, 80, null);
 
