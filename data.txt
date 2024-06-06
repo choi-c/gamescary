@@ -22,6 +22,7 @@ power-ups, random
 - row or column, if theres a table, generate new random row or column
 only see around you a certain number of blocks (flashlight, fog), or
 (limited screen) 
+- stopping them in place for a few seconds
 
 not required but wanted:
 make rooms blacked out if player is not in the room
