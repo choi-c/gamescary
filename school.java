@@ -7,11 +7,11 @@ import java.awt.image.*;
 public class school extends JPanel{
     // Properties
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall = null;
-    String[][] strMap = new String[30][40];
-    int playerX = 2;
-    int playerY = 29;
-    int intPX = 2;
-    int intPY = 29;
+    String[][] strMap = new String[38][48];
+    int playerX = 5;
+    int playerY = 34;
+    int intPX = 5;
+    int intPY = 32;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -38,8 +38,8 @@ public class school extends JPanel{
         String strLine = null;
         String strSplit[];
 
-        intPY = 29; // max: 30
-        intPX = 2; // max: 40
+        intPY = 32; // max: 30
+        intPX = 5; // max: 40
 
         // Loading map array
         try{
@@ -49,13 +49,13 @@ public class school extends JPanel{
         }
 
         // Reading from school.csv array
-		for(intRow = 0; intRow < 30; intRow++){
+		for(intRow = 0; intRow < 38; intRow++){
             try{
                 strLine = fileMap.readLine();
             }catch(IOException e){
                 System.out.println("File not found");
             }
-			for(intCol = 0; intCol < 40; intCol++){
+			for(intCol = 0; intCol < 48; intCol++){
 				strSplit = strLine.split(",");
 				strMap[intRow][intCol] = strSplit[intCol];
 			}
@@ -68,10 +68,10 @@ public class school extends JPanel{
 
         int intX = 0;
 		int intY = 0;
-		for(intRow = 0; intRow < 30; intRow++){
+		for(intRow = 0; intRow < 38; intRow++){
             // track if rows have visible cells
             boolean rowVisibleCells = false;
-			for(intCol = 0; intCol < 40; intCol++){
+			for(intCol = 0; intCol < 48; intCol++){
                 if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
                     if(intRow >= intPY - 4 && intRow <= intPY + 4 && intCol >= intPX - 4 && intCol <= intPX + 4){
                         // mark the rows with visible cells
