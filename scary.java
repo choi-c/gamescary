@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.event.KeyListener.*;
 
 public class scary implements ActionListener, KeyListener{
     // Properties
@@ -14,7 +15,7 @@ public class scary implements ActionListener, KeyListener{
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn;
-    String strName = null, strSelect;
+    public String strName = null, strSelect;
 
     //SuperSocketMaster ssm;
 
@@ -87,6 +88,7 @@ public class scary implements ActionListener, KeyListener{
         System.out.println("A key was typed");
 
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
+            System.out.println(evt.getKeyChar());
 			panel.intPY = panel.intPY + 1;
             System.out.println(panel.intPY);
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
@@ -172,21 +174,18 @@ public class scary implements ActionListener, KeyListener{
         // The actual game
         panel = new school();
         panel.setLayout(null);
-
+        frame.addKeyListener(this);        
         chat.setBounds(920,0,720,1280);
         panel.add(chat);
 
         tagb = new JButton("Tag");
         //tagb.setBounds()
-
-        frame.addKeyListener(this);
       
         frame.setContentPane(startPanel);
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
     }
 
     // Main Method
