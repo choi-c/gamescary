@@ -87,14 +87,14 @@ public class scary implements ActionListener, KeyListener{
         System.out.println("A key was typed");
 
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
-			panel.intPY ++;
+			//panel.intPY ++;
             System.out.println(panel.intPY);
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-            panel.intPY --;
+            //panel.intPY --;
         }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-            panel.intPX --;
+            //panel.intPX --;
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-            panel.intPX ++;
+            //panel.intPX ++;
         }
     }
 
@@ -178,13 +178,15 @@ public class scary implements ActionListener, KeyListener{
 
         tagb = new JButton("Tag");
         //tagb.setBounds()
+
+        frame.addKeyListener(this);
       
         frame.setContentPane(startPanel);
         frame.pack();
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.addKeyListener(this);
+        
     }
 
     // Main Method
