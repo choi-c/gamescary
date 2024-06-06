@@ -38,8 +38,8 @@ public class school extends JPanel{
         String strLine = null;
         String strSplit[];
 
-        intPY = 2; // max: 30
-        intPX = 29; // max: 40
+        intPY = 29; // max: 30
+        intPX = 2; // max: 40
 
         // Loading map array
         try{
@@ -72,8 +72,8 @@ public class school extends JPanel{
             // track if rows have visible cells
             boolean rowVisibleCells = false;
 			for(intCol = 0; intCol < 40; intCol++){
-                //if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
-                    if(intRow >= intPY - 4 && intRow <= intPY + 4 && intCol >= intX - 4 && intCol <= intPX + 4){
+                if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
+                    if(intRow >= intPY - 4 && intRow <= intPY + 4 && intCol >= intPX - 4 && intCol <= intPX + 4){
                         // mark the rows with visible cells
                         rowVisibleCells = true;
                         //System.out.println(strMap[intRow][intCol]);
@@ -101,7 +101,7 @@ public class school extends JPanel{
                         g.fillRect(intX,intY,80,80);
                         intX = intX + 80;
                     }*/
-                //}
+                }
 			}
             // if the cells are visible, move onto the nexxt row
             if(rowVisibleCells){
