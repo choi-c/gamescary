@@ -25,9 +25,7 @@ public class school extends JPanel{
             }
         }
     }
-    public void loadMap(int intPX, int intPY){
-        
-    }
+
     // painting the map
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -45,16 +43,17 @@ public class school extends JPanel{
 		int intCol;
         String strLine = null;
         String strSplit[];
-        int intPX = 0;
-        int intPY = 0;
+        // i mixed up the X and Y
+        int intPX = 10; // max: 30
+        int intPY = 30; // max: 40
 
-		for(intRow = intPX-4; intRow < intPX+4; intRow++){
+		for(intRow = 0; intRow < 30; intRow++){
             try{
                 strLine = fileMap.readLine();
             }catch(IOException e){
                 System.out.println("File not found");
             }
-			for(intCol = 0; intCol < 20; intCol++){
+			for(intCol = 0; intCol < 40; intCol++){
 				strSplit = strLine.split(",");
 				strMap[intRow][intCol] = strSplit[intCol];
 			}
@@ -65,33 +64,51 @@ public class school extends JPanel{
             System.out.println("File not found");
         }
 
-
-        //g.drawImage(hider1, intX, intY, 80, 80, null);
-
         int intX = 0;
 		int intY = 0;
-		for(intRow = 0; intRow < 20; intRow++){
-			for(intCol = 0; intCol < 20; intCol++){
-				if(strMap[intRow][intCol].equals("l")){
-					g.drawImage(locker, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("c")){
-					g.drawImage(chair, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("d")){
-					g.drawImage(desk, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("p")){
-					g.drawImage(principal, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("s")){
-					g.drawImage(pillar, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("f")){
-					g.drawImage(floor, intX, intY, 80, 80, null);
-				}else if(strMap[intRow][intCol].equals("w")){
-					g.drawImage(wall, intX, intY, 80, 80, null);
-				}
-				intX = intX + 80;
+		for(intRow = 0; intRow < 30; intRow++){
+            // track if rows have visible cells
+            boolean rowVisibleCells = false;
+			for(intCol = 0; intCol < 40; intCol++){
+                //if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
+                    if(intRow >= intPX - 4 && intRow <= intPX + 4 && intCol >= intPY - 4 && intCol <= intPY + 4){
+                        // mark the rows with visible cells
+                        rowVisibleCells = true;
+                        System.out.println(strMap[intRow][intCol]);
+                        //if (strMap[intRow][intCol] != null) {
+                            if(strMap[intRow][intCol].equals("l")){
+                                g.drawImage(locker, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("c")){
+                                g.drawImage(chair, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("d")){
+                                g.drawImage(desk, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("p")){
+                                g.drawImage(principal, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("s")){
+                                g.drawImage(pillar, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("f")){
+                                g.drawImage(floor, intX, intY, 80, 80, null);
+                            }else if(strMap[intRow][intCol].equals("w")){
+                                g.drawImage(wall, intX, intY, 80, 80, null);
+                            }
+                        //}
+                        intX = intX + 80;
+                        System.out.println(intX+","+intY);
+                    }/*else{
+                        g.setColor(Color.BLACK);
+                        g.fillRect(intX,intY,80,80);
+                        intX = intX + 80;
+                    }*/
+                //}
 			}
+            // if the cells are visible, move onto the nexxt row
+            if(rowVisibleCells){
+                intY += 80;
+            }
 			intX = 0;
-			intY = intY + 80;
 		}
+        // iamge of player does not change
+        g.drawImage(hider1, 320, 320, 80, 80, null);
     }
 
     // Constructor
