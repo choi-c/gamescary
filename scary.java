@@ -41,8 +41,8 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(true);
             selectName.setBounds(75,0,200,100);
-            strSelect.equals("seeker1");
-            System.out.println("strSelect");
+            strSelect = "seeker1";
+            System.out.println(strSelect);
             frame.validate();
         }else if(evt.getSource() == char2){
             char1.setEnabled(true);
@@ -50,8 +50,8 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(true);
             selectName.setBounds(380,0,200,100);
-            strSelect.equals("seeker2");
-            System.out.println("strSelect");
+            strSelect = "seeker2";
+            System.out.println(strSelect);
             frame.validate();
         }else if(evt.getSource() == char3){
             char1.setEnabled(true);
@@ -59,8 +59,8 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(false);
             char4.setEnabled(true);
             selectName.setBounds(700,0,200,100);
-            strSelect.equals("hider1");
-            System.out.println("strSelect");
+            strSelect = "hider1";
+            System.out.println(strSelect);
             frame.validate();
         }else if(evt.getSource() == char4){
             char1.setEnabled(true);
@@ -68,8 +68,8 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(false);
             selectName.setBounds(1020,0,200,100);
-            strSelect.equals("hider2");
-            System.out.println("strSelect");
+            strSelect = "hider2";
+            System.out.println(strSelect);
             frame.validate();
         }else if(evt.getSource() == lockIn){
             System.out.println("playing as "+strSelect);
@@ -87,14 +87,14 @@ public class scary implements ActionListener, KeyListener{
         System.out.println("A key was typed");
 
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
-			//panel.intPY ++;
+			panel.intPY = panel.intPY + 1;
             System.out.println(panel.intPY);
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-            //panel.intPY --;
+            panel.intPY = panel.intPY - 1;
         }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-            //panel.intPX --;
+            panel.intPX --;
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-            //panel.intPX ++;
+            panel.intPX ++;
         }
     }
 

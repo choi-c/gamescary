@@ -96,11 +96,7 @@ public class school extends JPanel{
                         //}
                         intX = intX + 80;
                         //System.out.println(intX+","+intY);
-                    }/*else{
-                        g.setColor(Color.BLACK);
-                        g.fillRect(intX,intY,80,80);
-                        intX = intX + 80;
-                    }*/
+                    }
                 }
 			}
             // if the cells are visible, move onto the nexxt row
