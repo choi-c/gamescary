@@ -10,6 +10,8 @@ public class school extends JPanel{
     String[][] strMap = new String[30][40];
     int playerX = 2;
     int playerY = 29;
+    int intPX = 2;
+    int intPY = 29;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -30,23 +32,23 @@ public class school extends JPanel{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
-        String[][] strMapShown = new String[9][9];
         BufferedReader fileMap = null;
+        int intRow;
+		int intCol;
+        String strLine = null;
+        String strSplit[];
 
+        intPY = 2; // max: 30
+        intPX = 29; // max: 40
+
+        // Loading map array
         try{
             fileMap = new BufferedReader(new FileReader("school.csv"));
         }catch(FileNotFoundException e){
             System.out.println("File not found");
         }
 
-        int intRow;
-		int intCol;
-        String strLine = null;
-        String strSplit[];
-        // i mixed up the X and Y
-        int intPX = 10; // max: 30
-        int intPY = 30; // max: 40
-
+        // Reading from school.csv array
 		for(intRow = 0; intRow < 30; intRow++){
             try{
                 strLine = fileMap.readLine();
@@ -71,10 +73,10 @@ public class school extends JPanel{
             boolean rowVisibleCells = false;
 			for(intCol = 0; intCol < 40; intCol++){
                 //if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
-                    if(intRow >= intPX - 4 && intRow <= intPX + 4 && intCol >= intPY - 4 && intCol <= intPY + 4){
+                    if(intRow >= intPY - 4 && intRow <= intPY + 4 && intCol >= intX - 4 && intCol <= intPX + 4){
                         // mark the rows with visible cells
                         rowVisibleCells = true;
-                        System.out.println(strMap[intRow][intCol]);
+                        //System.out.println(strMap[intRow][intCol]);
                         //if (strMap[intRow][intCol] != null) {
                             if(strMap[intRow][intCol].equals("l")){
                                 g.drawImage(locker, intX, intY, 80, 80, null);
@@ -93,7 +95,7 @@ public class school extends JPanel{
                             }
                         //}
                         intX = intX + 80;
-                        System.out.println(intX+","+intY);
+                        //System.out.println(intX+","+intY);
                     }/*else{
                         g.setColor(Color.BLACK);
                         g.fillRect(intX,intY,80,80);

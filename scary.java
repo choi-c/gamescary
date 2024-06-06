@@ -2,8 +2,6 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
-import javax.imageio.*;
 
 public class scary implements ActionListener, KeyListener{
     // Properties
@@ -80,20 +78,23 @@ public class scary implements ActionListener, KeyListener{
         }
     }
     public void keyPressed(KeyEvent evt){
-
+        System.out.println("A key was pressed");
     }
     public void keyReleased(KeyEvent evt){
-
+        System.out.println("A key was released");
     }
     public void keyTyped(KeyEvent evt){
+        System.out.println("A key was typed");
+
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
-			
+			panel.intPY ++;
+            System.out.println(panel.intPY);
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-
+            panel.intPY --;
         }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-	
+            panel.intPX --;
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-
+            panel.intPX ++;
         }
     }
 
@@ -183,6 +184,7 @@ public class scary implements ActionListener, KeyListener{
         frame.setResizable(false);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addKeyListener(this);
     }
 
     // Main Method

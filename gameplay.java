@@ -1,7 +1,7 @@
 public class gameplay {
     // Properties
-    String strMap[][] = new String[][];
-    
+    //String strMap[][] = new String[][];
+
 
     // Methods
 
