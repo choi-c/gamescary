@@ -75,6 +75,7 @@ public class scary implements ActionListener, KeyListener{
         }else if(evt.getSource() == lockIn){
             System.out.println("playing as "+strSelect);
             frame.setContentPane(panel);
+            frame.addKeyListener(this);
             frame.validate();
         }
     }
@@ -91,12 +92,16 @@ public class scary implements ActionListener, KeyListener{
             System.out.println(evt.getKeyChar());
 			panel.intPY = panel.intPY + 1;
             System.out.println(panel.intPY);
+            panel.repaint();
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
             panel.intPY = panel.intPY - 1;
+            panel.repaint();
         }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
             panel.intPX --;
+            panel.repaint();
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
             panel.intPX ++;
+            panel.repaint();
         }
     }
 

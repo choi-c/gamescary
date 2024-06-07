@@ -9,7 +9,7 @@ public class school extends JPanel{
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall = null;
     String[][] strMap = new String[38][48];
     int playerX = 5;
-    int playerY = 34;
+    int playerY = 32;
     int intPX = 5;
     int intPY = 32;
 
@@ -37,10 +37,6 @@ public class school extends JPanel{
 		int intCol;
         String strLine = null;
         String strSplit[];
-
-        intPY = 32; // max: 30
-        intPX = 5; // max: 40
-
         // Loading map array
         try{
             fileMap = new BufferedReader(new FileReader("school.csv"));
