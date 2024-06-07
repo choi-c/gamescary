@@ -18,8 +18,8 @@ public class gameplay extends scary{
         }
     }
     public boolean tag(int intChrChoice,int intH1X,int intH2Y,int intS1X,int intS1,int intH2X,int intH2Y){
-        if(intChrChoice == 1){
-
+        if(intS1X == intH1X && intS1Y == intH1X){
+            
         }
     }
 
