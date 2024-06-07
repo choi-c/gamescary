@@ -3,7 +3,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyListener.*;
-import java.lang.*;
+import java.lang.Thread.*;
 
 public class scary implements ActionListener, KeyListener{
     // Properties
@@ -17,6 +17,8 @@ public class scary implements ActionListener, KeyListener{
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
     public String strName = null, strSelect;
+    boolean blnTyped = false;
+    boolean aOn, sOn, dOn, wOn;
 
     //SuperSocketMaster ssm;
 
@@ -86,41 +88,45 @@ public class scary implements ActionListener, KeyListener{
     public void keyPressed(KeyEvent evt){
         System.out.println("A key was pressed");
 
-        if(evt.getKeyChar() == 's'){
+        if(evt.getKeyChar() == 's' && sOn){
             panel.intPY ++;
+            sOn = false;
             panel.repaint();
-        }else if(evt.getKeyChar() == 'w'){
+        }else if(evt.getKeyChar() == 'w' && wOn){
             panel.intPY --;
+            wOn = false;
             panel.repaint();
         }
-        if(evt.getKeyChar() == 'a'){
+        if(evt.getKeyChar() == 'a' && aOn){
             panel.intPX --;
+            aOn = false;
             panel.repaint();
-        }else if(evt.getKeyChar() == 'd'){
+        }else if(evt.getKeyChar() == 'd' && dOn){
             panel.intPX ++;
+            dOn = false;
             panel.repaint();
         }
 
     }
     public void keyReleased(KeyEvent evt){
         System.out.println("A key was released");
-        /*
+        
         if(evt.getKeyChar() == 's'){
-            panel.intPY -= 1;
+            sOn = true;
         }else if(evt.getKeyChar() == 'w'){
-            panel.intPY -= 1;
+            wOn = true;
         }
         if(evt.getKeyChar() == 'a'){
-            panel.intPX --;
+            aOn = true;
         }else if(evt.getKeyChar() == 'd'){
-            panel.intPX --;
+            dOn = true;
         }
-        */
+        
 
     }
     public void keyTyped(KeyEvent evt){
         System.out.println("A key was typed");
-
+        /* 
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
             System.out.println(evt.getKeyChar());
 			panel.intPY ++;
@@ -132,11 +138,7 @@ public class scary implements ActionListener, KeyListener{
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
             panel.intPX ++;
         }
-        try{
-            thread.sleep(200);
-        }catch(InterruptedException e){
-            System.out.println("Game was inturrupted");
-        }
+        */
         panel.repaint();
         
     }
