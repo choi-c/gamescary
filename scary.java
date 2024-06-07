@@ -19,6 +19,7 @@ public class scary implements ActionListener, KeyListener{
     public String strName = null, strSelect;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
+    int intStep = 1;
 
     //SuperSocketMaster ssm;
 
@@ -86,30 +87,30 @@ public class scary implements ActionListener, KeyListener{
         }
     }
     public void keyPressed(KeyEvent evt){
-        System.out.println("A key was pressed");
+        //System.out.println("A key was pressed");
 
         if(evt.getKeyChar() == 's' && sOn){
-            panel.intPY ++;
+            panel.intPY += intStep;
             sOn = false;
-            panel.repaint();
         }else if(evt.getKeyChar() == 'w' && wOn){
             panel.intPY --;
             wOn = false;
-            panel.repaint();
         }
         if(evt.getKeyChar() == 'a' && aOn){
             panel.intPX --;
             aOn = false;
-            panel.repaint();
         }else if(evt.getKeyChar() == 'd' && dOn){
             panel.intPX ++;
             dOn = false;
-            panel.repaint();
         }
+        if(panel.strBlock != "w" && panel.strBlock != "s"){
+            panel.intPY += intStep;
+        }
+        panel.repaint();
 
     }
     public void keyReleased(KeyEvent evt){
-        System.out.println("A key was released");
+        //System.out.println("A key was released");
         
         if(evt.getKeyChar() == 's'){
             sOn = true;
@@ -125,22 +126,6 @@ public class scary implements ActionListener, KeyListener{
 
     }
     public void keyTyped(KeyEvent evt){
-        System.out.println("A key was typed");
-        /* 
-        if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
-            System.out.println(evt.getKeyChar());
-			panel.intPY ++;
-            System.out.println(panel.intPY);
-		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-            panel.intPY --;
-        }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
-            panel.intPX --;
-		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
-            panel.intPX ++;
-        }
-        */
-        panel.repaint();
-        
     }
 
     // Constructor

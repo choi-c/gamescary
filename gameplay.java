@@ -25,12 +25,9 @@ public class gameplay extends scary{
         }
         return false;
     }
-    public int boundaries(){
-        String strBlock = strMap[intPX][intPY];
-        if(strBlock == "w"){
+    public int boundaries(String strBlock){
+        if(strBlock == "w" || strBlock == "s"){
             //2 == dont move
-            return 2;
-        }else if(strBlock == "s"){
             return 2;
         }else if(strBlock == "l"){
             //3 == dont print character
@@ -40,6 +37,8 @@ public class gameplay extends scary{
         }else if(strBlock == "f"){
             //1 == move freely
             return 1;
+        }else{
+            return 0;
         }
     }
 

@@ -12,6 +12,7 @@ public class school extends JPanel{
     int playerY = 32;
     int intPX = 6;
     int intPY = 32;
+    String strBlock;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -100,6 +101,7 @@ public class school extends JPanel{
                 intY += 80;
             }
 			intX = 0;
+            strBlock = strMap[intPX][intPY];
 		}
         // iamge of player does not change
         g.drawImage(hider1, 320, 320, 80, 80, null);
