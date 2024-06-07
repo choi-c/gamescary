@@ -3,6 +3,7 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyListener.*;
+import java.lang.*;
 
 public class scary implements ActionListener, KeyListener{
     // Properties
@@ -14,7 +15,7 @@ public class scary implements ActionListener, KeyListener{
     JButton connectb,tagb;
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
-    JButton char1,char2,char3,char4, lockIn;
+    JButton char1,char2,char3,char4, lockIn,send;
     public String strName = null, strSelect;
 
     //SuperSocketMaster ssm;
@@ -78,31 +79,66 @@ public class scary implements ActionListener, KeyListener{
             frame.addKeyListener(this);
             frame.validate();
         }
+        if(evt.getSource() == send){
+            frame.requestFocus();
+        }
     }
     public void keyPressed(KeyEvent evt){
         System.out.println("A key was pressed");
+
+        if(evt.getKeyChar() == 's'){
+            panel.intPY ++;
+            panel.repaint();
+        }else if(evt.getKeyChar() == 'w'){
+            panel.intPY --;
+            panel.repaint();
+        }
+        if(evt.getKeyChar() == 'a'){
+            panel.intPX --;
+            panel.repaint();
+        }else if(evt.getKeyChar() == 'd'){
+            panel.intPX ++;
+            panel.repaint();
+        }
+
     }
     public void keyReleased(KeyEvent evt){
         System.out.println("A key was released");
+        /*
+        if(evt.getKeyChar() == 's'){
+            panel.intPY -= 1;
+        }else if(evt.getKeyChar() == 'w'){
+            panel.intPY -= 1;
+        }
+        if(evt.getKeyChar() == 'a'){
+            panel.intPX --;
+        }else if(evt.getKeyChar() == 'd'){
+            panel.intPX --;
+        }
+        */
+
     }
     public void keyTyped(KeyEvent evt){
         System.out.println("A key was typed");
 
         if(evt.getKeyChar() == 's' || evt.getKeyChar() == 'S'){
             System.out.println(evt.getKeyChar());
-			panel.intPY = panel.intPY + 1;
+			panel.intPY ++;
             System.out.println(panel.intPY);
-            panel.repaint();
 		}else if(evt.getKeyChar() == 'w' || evt.getKeyChar() == 'W'){
-            panel.intPY = panel.intPY - 1;
-            panel.repaint();
+            panel.intPY --;
         }else if(evt.getKeyChar() == 'a' || evt.getKeyChar() == 'A'){
             panel.intPX --;
-            panel.repaint();
 		}else if(evt.getKeyChar() == 'd' || evt.getKeyChar() == 'D'){
             panel.intPX ++;
-            panel.repaint();
         }
+        try{
+            thread.sleep(200);
+        }catch(InterruptedException e){
+            System.out.println("Game was inturrupted");
+        }
+        panel.repaint();
+        
     }
 
     // Constructor
@@ -179,9 +215,17 @@ public class scary implements ActionListener, KeyListener{
         // The actual game
         panel = new school();
         panel.setLayout(null);
-        frame.addKeyListener(this);        
-        chat.setBounds(920,0,720,1280);
+    
+        chat.setBounds(920,0,720,960);
         panel.add(chat);
+
+        send = new JButton("SEND");
+        send.setBounds(850,320,50,50);
+        send.addActionListener(this);
+        panel.add(send);
+
+        frame.requestFocus();
+        frame.addKeyListener(this);
 
         tagb = new JButton("Tag");
         //tagb.setBounds()

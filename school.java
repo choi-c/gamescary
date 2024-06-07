@@ -10,7 +10,7 @@ public class school extends JPanel{
     String[][] strMap = new String[38][48];
     int playerX = 5;
     int playerY = 32;
-    int intPX = 5;
+    int intPX = 6;
     int intPY = 32;
 
     // Methods
