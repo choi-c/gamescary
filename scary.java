@@ -88,24 +88,30 @@ public class scary implements ActionListener, KeyListener{
     }
     public void keyPressed(KeyEvent evt){
         //System.out.println("A key was pressed");
+        System.out.println(panel.strBlock);
+        if(panel.strBlock.equals("w") || panel.strBlock.equals("s") || panel.strBlock.equals("c")){
+            //panel.intPY += intStep;
+            intStep = -1;
+        }else if(panel.strBlock.equals("f") || panel.strBlock.equals("l") || panel.strBlock.equals("d")){
+            intStep = 1;
+        }
+        System.out.println(intStep);
 
         if(evt.getKeyChar() == 's' && sOn){
             panel.intPY += intStep;
             sOn = false;
         }else if(evt.getKeyChar() == 'w' && wOn){
-            panel.intPY --;
+            panel.intPY -= intStep;
             wOn = false;
         }
         if(evt.getKeyChar() == 'a' && aOn){
-            panel.intPX --;
+            panel.intPX -= intStep;
             aOn = false;
         }else if(evt.getKeyChar() == 'd' && dOn){
-            panel.intPX ++;
+            panel.intPX += intStep;
             dOn = false;
         }
-        if(panel.strBlock != "w" && panel.strBlock != "s"){
-            panel.intPY += intStep;
-        }
+        
         panel.repaint();
 
     }
