@@ -3,6 +3,10 @@ import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyListener.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.Thread.*;
 
 public class scary implements ActionListener, KeyListener{
@@ -20,6 +24,7 @@ public class scary implements ActionListener, KeyListener{
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
+    String[][] strMap = new String[38][48];
 
     //SuperSocketMaster ssm;
 
@@ -88,6 +93,7 @@ public class scary implements ActionListener, KeyListener{
     }
     public void keyPressed(KeyEvent evt){
         //System.out.println("A key was pressed");
+        /*
         System.out.println(panel.strBlock);
         if(panel.strBlock.equals("w") || panel.strBlock.equals("s") || panel.strBlock.equals("c")){
             //panel.intPY += intStep;
@@ -96,19 +102,19 @@ public class scary implements ActionListener, KeyListener{
             intStep = 1;
         }
         System.out.println(intStep);
+        */
 
-        if(evt.getKeyChar() == 's' && sOn){
-            panel.intPY += intStep;
+        if(evt.getKeyChar() == 's' && sOn && strMap[panel.intPX][panel.intPY + 1].equals("f")){
+            panel.intPY += 1;
             sOn = false;
-        }else if(evt.getKeyChar() == 'w' && wOn){
-            panel.intPY -= intStep;
+        }else if(evt.getKeyChar() == 'w' && wOn && strMap[panel.intPX][panel.intPY - 1].equals("f")){
+            panel.intPY -= 1;
             wOn = false;
-        }
-        if(evt.getKeyChar() == 'a' && aOn){
-            panel.intPX -= intStep;
+        }else if(evt.getKeyChar() == 'a' && aOn && strMap[panel.intPX - 1][panel.intPY].equals("f")){
+            panel.intPX -= 1;
             aOn = false;
-        }else if(evt.getKeyChar() == 'd' && dOn){
-            panel.intPX += intStep;
+        }else if(evt.getKeyChar() == 'd' && dOn && strMap[panel.intPX + 1][panel.intPY].equals("f")){
+            panel.intPX += 1;
             dOn = false;
         }
         
@@ -136,6 +142,28 @@ public class scary implements ActionListener, KeyListener{
 
     // Constructor
     public scary(){
+        BufferedReader fileMap = null;
+        int intRow;
+		int intCol;
+        String strLine = null;
+        String strSplit[];
+        try{
+            fileMap = new BufferedReader(new FileReader("school.csv"));
+        }catch(FileNotFoundException e){
+            System.out.println("File not found");
+        }
+        for(intRow = 0; intRow < 38; intRow++){
+            try{
+                strLine = fileMap.readLine();
+            }catch(IOException e){
+                System.out.println("File not found");
+            }
+			for(intCol = 0; intCol < 48; intCol++){
+				strSplit = strLine.split(",");
+				strMap[intRow][intCol] = strSplit[intCol];
+			}
+		}
+
         frame = new JFrame("Scary Hide & seek");
 
         // setting up start screen
