@@ -91,6 +91,11 @@ public class scary implements ActionListener, KeyListener{
             frame.requestFocus();
         }
     }
+    
+    public String getSelect(){
+        return strSelect;
+    }
+
     public void keyPressed(KeyEvent evt){
         //System.out.println("A key was pressed");
         /*
