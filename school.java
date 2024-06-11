@@ -6,12 +6,13 @@ import java.awt.image.*;
 
 public class school extends JPanel{
     // Properties
-    BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall = null;
-    String[][] strMap = new String[38][51];
+    BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall,ice,flashlight = null;
+    String[][] strMap = new String[51][51];
     int playerX = 5;
     int playerY = 32;
     int intPX = 5;
     int intPY = 32;
+    int flx = 1, fly = 1, ix = 1, iy = 1;
     String strBlock;
 
     // Methods
@@ -103,9 +104,37 @@ public class school extends JPanel{
 			intX = 0;
             strBlock = strMap[intPX][intPY];
 		}
-        // iamge of player does not change
+
+        //randomized powerups
+        //flashlight
+        if(strMap[flx][fly].equals("f")){
+            //g.drawImage(flashlight, flx, fly, 80, 80, null);
+        }else{
+            flx = (int)(Math.random()*38+1);
+            fly = (int)(Math.random()*51+1);
+        }
+        //ice
+        if(strMap[ix][iy].equals("f")){
+            //g.drawImage(ice, ix, iy, 80, 80, null);
+        }else{
+            ix = (int)(Math.random()*38+1);
+            iy = (int)(Math.random()*51+1);
+        }
+
+        // image of player does change
         g.drawImage(hider1, 320, 320, 80, 80, null);
+        /* 
+        if(scary.getSelect().equals("hider1")){
+            g.drawImage(hider1, 320, 320, 80, 80, null);
+        }else if(scary.getSelect().equals("hider2")){
+            g.drawImage(hider2, 320, 320, 80, 80, null);
+        }else if(scary.getSelect().equals("seeker1")){
+            g.drawImage(seeker1, 320, 320, 80, 80, null);
+        }else if(scary.getSelect().equals("seeker2")){
+            g.drawImage(seeker2, 320, 320, 80, 80, null);
+        }*/
     }
+
 
     // Constructor
     public school(){
@@ -123,6 +152,9 @@ public class school extends JPanel{
             seeker2 = ImageIO.read(new File("seeker2.png"));
             desk = ImageIO.read(new File("table.png"));
             wall = ImageIO.read(new File("wall.png"));
+            ice = ImageIO.read(new File("ice.png"));
+            flashlight = ImageIO.read(new File("flashlight.png"));
+
 
         }catch(IOException e){
             System.out.println("Unable to load image");

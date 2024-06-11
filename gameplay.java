@@ -1,19 +1,34 @@
 public class gameplay extends scary{
     // Properties
     boolean blnVisibility = false;
+    boolean blnPi = false;
+    boolean blnPfl = false;
     boolean blnAlive = true;
-    int intChrChoice = 0;
     int intH1X,intH1Y;
     int intS1X, intS1Y;
     int intH2X,intH2Y;
 
     // Methods
     public void characterBuffs(int intChrChoice,boolean blnVisibility){
+        /* 
+        if(intPX == flx && intPY == fly){
+            //character on flashlight powerup
+            blnPfl == true;
+        }else if(intPX == ix && intPY == iy){
+            //character on ice powerup
+            blnPi == true
+        }*/
+
         // if seeker chooses eyeball skin
-        if(intChrChoice == 1){
+        if(strSelect.equals("seeker1") || blnPfl == true){
+            //sees more blocks
             blnVisibility = true;
         // if seeker chooses monester skin
-        }else if(intChrChoice == 2){
+        }else if(strSelect.equals("seeker2")){
+            //bigger tag radius (?)
+        
+        }else if(blnPi == true){
+            //ice powerup
 
         }
     }

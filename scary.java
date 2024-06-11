@@ -24,7 +24,7 @@ public class scary implements ActionListener, KeyListener{
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
-    String[][] strMap = new String[38][48];
+    String[][] strMap = new String[51][51];
 
     //SuperSocketMaster ssm;
 
@@ -91,6 +91,11 @@ public class scary implements ActionListener, KeyListener{
             frame.requestFocus();
         }
     }
+    
+    public String getSelect(){
+        return strSelect;
+    }
+
     public void keyPressed(KeyEvent evt){
         //System.out.println("A key was pressed");
         /*
@@ -104,18 +109,20 @@ public class scary implements ActionListener, KeyListener{
         System.out.println(intStep);
         */
 
-        if(evt.getKeyChar() == 's' && sOn && strMap[panel.intPX][panel.intPY + 1].equals("f")){
+        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w")){
             panel.intPY += 1;
             sOn = false;
-        }else if(evt.getKeyChar() == 'w' && wOn && strMap[panel.intPX][panel.intPY - 1].equals("f")){
+        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w")){
             panel.intPY -= 1;
             wOn = false;
-        }else if(evt.getKeyChar() == 'a' && aOn && strMap[panel.intPX - 1][panel.intPY].equals("f")){
+        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w")){
             panel.intPX -= 1;
+            System.out.println(panel.intPX);
             aOn = false;
-        }else if(evt.getKeyChar() == 'd' && dOn && strMap[panel.intPX + 1][panel.intPY].equals("f")){
+        }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w")){
             panel.intPX += 1;
             dOn = false;
+            System.out.println(panel.intPX);
         }
         
         panel.repaint();
@@ -142,28 +149,6 @@ public class scary implements ActionListener, KeyListener{
 
     // Constructor
     public scary(){
-        BufferedReader fileMap = null;
-        int intRow;
-		int intCol;
-        String strLine = null;
-        String strSplit[];
-        try{
-            fileMap = new BufferedReader(new FileReader("school.csv"));
-        }catch(FileNotFoundException e){
-            System.out.println("File not found");
-        }
-        for(intRow = 0; intRow < 38; intRow++){
-            try{
-                strLine = fileMap.readLine();
-            }catch(IOException e){
-                System.out.println("File not found");
-            }
-			for(intCol = 0; intCol < 48; intCol++){
-				strSplit = strLine.split(",");
-				strMap[intRow][intCol] = strSplit[intCol];
-			}
-		}
-
         frame = new JFrame("Scary Hide & seek");
 
         // setting up start screen
