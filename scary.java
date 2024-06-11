@@ -104,17 +104,17 @@ public class scary implements ActionListener, KeyListener{
         System.out.println(intStep);
         */
 
-        if(evt.getKeyChar() == 's' && sOn && panel.strMap[panel.intPY + 1][panel.intPX].equals("f")){
+        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w")){
             panel.intPY += 1;
             sOn = false;
-        }else if(evt.getKeyChar() == 'w' && wOn && panel.strMap[panel.intPY - 1][panel.intPX].equals("f")){
+        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w")){
             panel.intPY -= 1;
             wOn = false;
-        }else if(evt.getKeyChar() == 'a' && aOn && panel.strMap[panel.intPY][panel.intPX - 1].equals("f")){
+        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w")){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
-        }else if(evt.getKeyChar() == 'd' && dOn && panel.strMap[panel.intPY][panel.intPX + 1].equals("f")){
+        }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w")){
             panel.intPX += 1;
             dOn = false;
             System.out.println(panel.intPX);
