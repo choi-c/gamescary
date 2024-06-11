@@ -7,10 +7,10 @@ import java.awt.image.*;
 public class school extends JPanel{
     // Properties
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall = null;
-    String[][] strMap = new String[38][48];
+    String[][] strMap = new String[38][51];
     int playerX = 5;
     int playerY = 32;
-    int intPX = 6;
+    int intPX = 5;
     int intPY = 32;
     String strBlock;
 
@@ -52,7 +52,7 @@ public class school extends JPanel{
             }catch(IOException e){
                 System.out.println("File not found");
             }
-			for(intCol = 0; intCol < 48; intCol++){
+			for(intCol = 0; intCol < 51; intCol++){
 				strSplit = strLine.split(",");
 				strMap[intRow][intCol] = strSplit[intCol];
 			}
@@ -68,7 +68,7 @@ public class school extends JPanel{
 		for(intRow = 0; intRow < 38; intRow++){
             // track if rows have visible cells
             boolean rowVisibleCells = false;
-			for(intCol = 0; intCol < 48; intCol++){
+			for(intCol = 0; intCol < 51; intCol++){
                 if (intRow >= 0 && intRow < strMap.length && intCol >= 0 && intCol < strMap[0].length) {
                     if(intRow >= intPY - 4 && intRow <= intPY + 4 && intCol >= intPX - 4 && intCol <= intPX + 4){
                         // mark the rows with visible cells
