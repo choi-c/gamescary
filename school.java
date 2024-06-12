@@ -14,8 +14,7 @@ public class school extends JPanel{
     int intPY = 32;
     int flx = 1, fly = 1, ix = 1, iy = 1;
     String strBlock;
-    gameplay gameplay = new gameplay();
-    int intChoice = gameplay.chrChoice();
+    //int intChoice = gameplay.chrChoice();
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -124,11 +123,11 @@ public class school extends JPanel{
         }
 
         // image of player does change
-        if(intChoice == 1){
-            g.drawImage(seeker1, 320, 320, 80, 80, null);
-        }else{
-            g.drawImage(hider1, 320, 320, 80, 80, null);
-        }
+        //if(intChoice == 1){
+            //g.drawImage(seeker1, 320, 320, 80, 80, null);
+        //}else{
+            //g.drawImage(hider1, 320, 320, 80, 80, null);
+        //}
         /*
         if(scary.getSelect().equals("hider1")){
             g.drawImage(hider1, 320, 320, 80, 80, null);

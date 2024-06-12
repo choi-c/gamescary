@@ -41,7 +41,7 @@ public class gameplay extends scary{
         return false;
     }
     public int boundaries(String strBlock){
-        if(strBlock == "w" || strBlock == "s"){
+        if(strBlock == "w" || strBlock == "s" || strBlock == "c"){
             //2 == dont move
             return 2;
         }else if(strBlock == "l"){
