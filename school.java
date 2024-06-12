@@ -69,6 +69,17 @@ public class school extends JPanel{
             System.out.println("File not found");
         }
 
+        // Flashligh Image
+        if(!strMap[flx][fly].equals("f")){
+            flx = (int)(Math.random()*51+1);
+            fly = (int)(Math.random()*38+1);
+        }
+        // Ice Image
+        if(!strMap[ix][iy].equals("f")){
+            ix = (int)(Math.random()*51+1);
+            iy = (int)(Math.random()*38+1);
+        }
+
         int intX = 0;
 		int intY = 0;
 		for(intRow = 0; intRow < 38; intRow++){
@@ -96,6 +107,11 @@ public class school extends JPanel{
                             }else if(strMap[intRow][intCol].equals("w")){
                                 g.drawImage(wall, intX, intY, 80, 80, null);
                             }
+                            if(flx == intCol && fly == intRow){
+                                g.drawImage(flashlight, intX, intY, 80, 80, null);
+                            }else if(ix == intCol && iy == intRow){
+                                g.drawImage(ice, intX, intY, 80, 80, null);
+                            }
                         //}
                         intX = intX + 80;
                         //System.out.println(intX+","+intY);
@@ -109,25 +125,7 @@ public class school extends JPanel{
 			intX = 0;
             strBlock = strMap[intPX][intPY];
 		}
-
-        //randomized powerups
-        //flashlight ------------------------------TIM LOOK HERE
-        if(!strMap[flx][fly].equals("f")){
-            flx = (int)(Math.random()*38+1);
-            fly = (int)(Math.random()*51+1);
-        }else{
-            System.out.println(flx*80+","+fly*80);
-            g.drawImage(flashlight, flx*80, fly*80, 80, 80, null);
-        }
         
-        //ice
-        if(strMap[ix][iy].equals("f")){
-            //g.drawImage(ice, ix, iy, 80, 80, null);
-        }else{
-            ix = (int)(Math.random()*38+1);
-            iy = (int)(Math.random()*51+1);
-        }
-
         // character image changes depending on character selected
         if(strSelect.equals("seeker1")){
             g.drawImage(seeker1, 320, 320, 80, 80, null);
