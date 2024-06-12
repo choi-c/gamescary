@@ -56,14 +56,6 @@ public class gameplay extends scary{
             return 0;
         }
     }
-    // printing different character skin depending on character selected
-    public int chrChoice(){
-        int intChoice = 0;
-        if(panel.strSelect.equals("seeker1")){
-            intChoice = 1;
-        }
-        return intChoice;
-    }
 
     // Constructor
     public gameplay(){

@@ -17,6 +17,8 @@ public class school extends JPanel{
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
 
+    
+
     // Methods
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
@@ -32,6 +34,7 @@ public class school extends JPanel{
         }
     }
 
+    
     // painting the map
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -109,11 +112,12 @@ public class school extends JPanel{
 
         //randomized powerups
         //flashlight
-        if(strMap[flx][fly].equals("f")){
-            //g.drawImage(flashlight, flx, fly, 80, 80, null);
-        }else{
+        if(!strMap[flx][fly].equals("f")){
             flx = (int)(Math.random()*38+1);
             fly = (int)(Math.random()*51+1);
+        }else{
+            System.out.println(flx+","+fly);
+            g.drawImage(flashlight, flx*80, fly*80, 80, 80, null);
         }
         //ice
         if(strMap[ix][iy].equals("f")){
@@ -123,7 +127,7 @@ public class school extends JPanel{
             iy = (int)(Math.random()*51+1);
         }
 
-        // image of player does change
+        // character image changes depending on character selected
         if(strSelect.equals("seeker1")){
             g.drawImage(seeker1, 320, 320, 80, 80, null);
         }else if(strSelect.equals("hider1")){
@@ -133,18 +137,8 @@ public class school extends JPanel{
         }else if(strSelect.equals("hider2")){
             g.drawImage(hider2, 320, 320, 80, 80, null);
         }else{
-            System.out.println("Character not selected error");
+            System.out.println("Character not selected error"); 
         }
-        /*
-        if(scary.getSelect().equals("hider1")){
-            g.drawImage(hider1, 320, 320, 80, 80, null);
-        }else if(scary.getSelect().equals("hider2")){
-            g.drawImage(hider2, 320, 320, 80, 80, null);
-        }else if(scary.getSelect().equals("seeker1")){
-            g.drawImage(seeker1, 320, 320, 80, 80, null);
-        }else if(scary.getSelect().equals("seeker2")){
-            g.drawImage(seeker2, 320, 320, 80, 80, null);
-        }*/
     }
 
 

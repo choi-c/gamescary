@@ -55,6 +55,8 @@ public class scary implements ActionListener, KeyListener{
             selectName.setBounds(75,0,200,100);
             panel.strSelect = "seeker1";
             System.out.println(panel.strSelect);
+            panel.intPX = 24;
+            panel.intPY = 13;
             frame.validate();
 /*
             imgS1 = new ImageIcon("seeker1.png");
@@ -71,14 +73,10 @@ public class scary implements ActionListener, KeyListener{
             selectName.setBounds(380,0,200,100);
             panel.strSelect = "seeker2";
             System.out.println(panel.strSelect);
-            //imgS1.setIconImage("seeker2.png");
+            panel.intPX = 24;
+            panel.intPY = 13;
             frame.validate();
-/*
-            imgS1 = new ImageIcon("seeker2.png");
-            s1 = new JLabel(imgS1);
-            s1.setBounds(320, 320, 80, 80);
-            panel.add(s1);
-*/
+
         }else if(evt.getSource() == char3){
             char1.setEnabled(true);
             char2.setEnabled(true);
