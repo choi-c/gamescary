@@ -13,13 +13,15 @@ public class scary implements ActionListener, KeyListener{
     // Properties
     JFrame frame;
     school panel;
+    help helpPanel;
     JTextArea chat = new JTextArea();
     start startPanel;
     characterselect characterPanel;
-    JButton connectb,tagb;
+    JButton connectb,tagb, helpb;
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
+    JButton next;
     public String strName = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
@@ -32,6 +34,10 @@ public class scary implements ActionListener, KeyListener{
 
     // Methods
     public void actionPerformed(ActionEvent evt){
+        if(evt.getSource() == helpb){
+            frame.setContentPane(helpPanel);
+            frame.validate();
+        }
         if(evt.getSource() == connectb){
             if(!strName.equals(null)){
                 if(!ip.getText().equals(null) && !port.getText().equals(null)){
@@ -190,12 +196,29 @@ public class scary implements ActionListener, KeyListener{
         name.addActionListener(this);
         startPanel.add(name);
 
+        // adding help button to take to help menu
+        helpb = new JButton("Help");
+        helpb.setBounds(800,450,200,75);
+        helpb.addActionListener(this);
+        startPanel.add(helpb);
+
+        // help screen panel
+        helpPanel = new help();
+        helpPanel.setLayout(null);
+        helpPanel.setPreferredSize(new Dimension(1280, 720));
+
+        next = new JButton("Next");
+        next.setBounds(540, 550, 200,75);
+        next.addActionListener(this);
+        helpPanel.add(next);
+
+        // connect button to continue to game
         connectb = new JButton("Connect");
         connectb.setBounds(800,550,300,100);
         connectb.addActionListener(this);
         startPanel.add(connectb);
         
-        // character select panel (only for players)
+        // character select panel
         characterPanel = new characterselect();
         characterPanel.setLayout(null);
         characterPanel.setPreferredSize(new Dimension(1280, 720));
