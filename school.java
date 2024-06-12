@@ -70,14 +70,14 @@ public class school extends JPanel{
         }
 
         // Flashligh Image
-        if(!strMap[flx][fly].equals("f")){
-            flx = (int)(Math.random()*51+1);
-            fly = (int)(Math.random()*38+1);
+        while(!strMap[flx][fly].equals("f")){
+            flx = (int)(Math.random()*37+1);
+            fly = (int)(Math.random()*50+1);
         }
         // Ice Image
-        if(!strMap[ix][iy].equals("f")){
-            ix = (int)(Math.random()*51+1);
-            iy = (int)(Math.random()*38+1);
+        while(!strMap[ix][iy].equals("f")){
+            ix = (int)(Math.random()*37+1);
+            iy = (int)(Math.random()*50+1);
         }
 
         int intX = 0;
@@ -138,6 +138,14 @@ public class school extends JPanel{
         }else{
             System.out.println("Character not selected error"); 
         }
+
+        // Hiding in tables and lockers
+        if(strMap[intPY][intPX].equals("l")){
+            g.drawImage(locker, 320, 320, 80, 80, null);
+        }else if(strMap[intPY][intPX].equals("d")){
+            g.drawImage(desk, 320, 320, 80, 80, null);
+        }
+
     }
 
 

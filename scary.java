@@ -123,22 +123,22 @@ public class scary implements ActionListener, KeyListener{
         System.out.println(intStep);
         */
 
-        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w")/* && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
+        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
             panel.intPY += 1;
             sOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") /*&& !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
+        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("c")){
             panel.intPY -= 1;
             wOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") /*&& !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
+        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("c")){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
             System.out.println(panel.ix+","+panel.iy);
-        }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
+        }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("c")){
             panel.intPX += 1;
             dOn = false;
             System.out.println(panel.intPX);
