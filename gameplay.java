@@ -23,7 +23,7 @@ public class gameplay extends scary{
         if(strSelect.equals("seeker1") || blnPfl == true){
             //sees more blocks
             blnVisibility = true;
-        // if seeker chooses monester skin
+        // if seeker chooses monster skin
         }else if(strSelect.equals("seeker2")){
             //bigger tag radius (?)
         
@@ -55,6 +55,14 @@ public class gameplay extends scary{
         }else{
             return 0;
         }
+    }
+    // printing different character skin depending on character selected
+    public int chrChoice(){
+        int intChoice = 0;
+        if(strSelect.equals("seeker1")){
+            intChoice = 1;
+        }
+        return intChoice;
     }
 
     // Constructor

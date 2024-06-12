@@ -20,7 +20,7 @@ public class scary implements ActionListener, KeyListener{
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
-    public String strName = null, strSelect;
+    public String strName = null, strSelect = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
