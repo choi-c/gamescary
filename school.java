@@ -6,7 +6,7 @@ import java.awt.image.*;
 
 public class school extends JPanel{
     // Properties
-    BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall,ice,flashlight = null;
+    BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall,ice,flashlight,visibility = null;
     String[][] strMap = new String[51][51];
     int playerX = 5;
     int playerY = 32;
@@ -16,8 +16,7 @@ public class school extends JPanel{
     String strBlock;
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
-
-    
+    Boolean blnVisibility = false, blnPi = false, blnPfl = false;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -107,10 +106,17 @@ public class school extends JPanel{
                             }else if(strMap[intRow][intCol].equals("w")){
                                 g.drawImage(wall, intX, intY, 80, 80, null);
                             }
-                            if(flx == intCol && fly == intRow){
-                                g.drawImage(flashlight, intX, intY, 80, 80, null);
-                            }else if(ix == intCol && iy == intRow){
-                                g.drawImage(ice, intX, intY, 80, 80, null);
+                            //blnPfl = gameplay.characterBuffs();
+                            //blnPi = gameplay.characterBuffs();
+                            if(blnPfl == false){
+                                if(flx == intCol && fly == intRow){
+                                    g.drawImage(flashlight, intX, intY, 80, 80, null);
+                                }
+                            }
+                            if(blnPi == false){
+                                if(ix == intCol && iy == intRow){
+                                    g.drawImage(ice, intX, intY, 80, 80, null);
+                                }
                             }
                         //}
                         intX = intX + 80;
@@ -139,11 +145,18 @@ public class school extends JPanel{
             System.out.println("Character not selected error"); 
         }
 
+        //visibility stuff
+        if(blnVisibility == false && !strSelect.equals("seeker1")){
+            g.drawImage(visibility,0, 0, 720, 720, null);
+        }
+
         // Hiding in tables and lockers
-        if(strMap[intPY][intPX].equals("l")){
-            g.drawImage(locker, 320, 320, 80, 80, null);
-        }else if(strMap[intPY][intPX].equals("d")){
-            g.drawImage(desk, 320, 320, 80, 80, null);
+        if(strSelect.equals("hider1") || strSelect.equals("hider2")){
+            if(strMap[intPY][intPX].equals("l")){
+                g.drawImage(locker, 320, 320, 80, 80, null);
+            }else if(strMap[intPY][intPX].equals("d")){
+                g.drawImage(desk, 320, 320, 80, 80, null);
+            }
         }
 
     }
@@ -167,7 +180,7 @@ public class school extends JPanel{
             wall = ImageIO.read(new File("wall.png"));
             ice = ImageIO.read(new File("ice.png"));
             flashlight = ImageIO.read(new File("flashlight.png"));
-
+            visibility = ImageIO.read(new File("visibility.png"));
 
         }catch(IOException e){
             System.out.println("Unable to load image");
