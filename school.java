@@ -111,14 +111,15 @@ public class school extends JPanel{
 		}
 
         //randomized powerups
-        //flashlight
+        //flashlight ------------------------------TIM LOOK HERE
         if(!strMap[flx][fly].equals("f")){
             flx = (int)(Math.random()*38+1);
             fly = (int)(Math.random()*51+1);
         }else{
-            System.out.println(flx+","+fly);
+            System.out.println(flx*80+","+fly*80);
             g.drawImage(flashlight, flx*80, fly*80, 80, 80, null);
         }
+        
         //ice
         if(strMap[ix][iy].equals("f")){
             //g.drawImage(ice, ix, iy, 80, 80, null);
