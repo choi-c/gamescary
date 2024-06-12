@@ -1,36 +1,38 @@
 public class gameplay extends scary{
     // Properties
-    boolean blnVisibility = false;
-    boolean blnPi = false;
-    boolean blnPfl = false;
     boolean blnAlive = true;
     int intH1X,intH1Y;
     int intS1X, intS1Y;
     int intH2X,intH2Y;
 
     // Methods
-    public void characterBuffs(int intChrChoice,boolean blnVisibility){
-        /* 
-        if(intPX == flx && intPY == fly){
+    public boolean characterBuffs(){
+         
+        if(panel.intPX == panel.flx && panel.intPY == panel.fly){
             //character on flashlight powerup
-            blnPfl == true;
-        }else if(intPX == ix && intPY == iy){
+            return true;
+            //panel.blnPfl = true;
+            //System.out.println(panel.blnPfl);
+        }else if(panel.intPX == panel.ix && panel.intPY == panel.iy){
             //character on ice powerup
-            blnPi == true
-        }*/
-
+            return true;
+            //panel.blnPi = true;
+            //System.out.println(panel.blnPi);
+        }
+        /*
         // if seeker chooses eyeball skin
-        if(panel.strSelect.equals("seeker1") || blnPfl == true){
+        if(panel.strSelect.equals("seeker1") || panel.blnPfl == true){
             //sees more blocks
-            blnVisibility = true;
+            panel.blnVisibility = true;
         // if seeker chooses monster skin
         }else if(panel.strSelect.equals("seeker2")){
             //bigger tag radius (?)
         
-        }else if(blnPi == true){
+        }else if(panel.blnPi == true){
             //ice powerup
 
-        }
+        }*/
+        return false;
     }
     public boolean tag(int intChrChoice,int intH1X,int intH1Y,int intS1X,int intS1,int intH2X,int intH2Y){
         if(intS1X == intH1X && intS1Y == intH1Y){
