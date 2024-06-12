@@ -20,11 +20,11 @@ public class gameplay extends scary{
         }*/
 
         // if seeker chooses eyeball skin
-        if(strSelect.equals("seeker1") || blnPfl == true){
+        if(panel.strSelect.equals("seeker1") || blnPfl == true){
             //sees more blocks
             blnVisibility = true;
         // if seeker chooses monster skin
-        }else if(strSelect.equals("seeker2")){
+        }else if(panel.strSelect.equals("seeker2")){
             //bigger tag radius (?)
         
         }else if(blnPi == true){
@@ -59,7 +59,7 @@ public class gameplay extends scary{
     // printing different character skin depending on character selected
     public int chrChoice(){
         int intChoice = 0;
-        if(strSelect.equals("seeker1")){
+        if(panel.strSelect.equals("seeker1")){
             intChoice = 1;
         }
         return intChoice;

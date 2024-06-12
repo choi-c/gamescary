@@ -20,7 +20,7 @@ public class scary implements ActionListener, KeyListener{
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
-    public String strName = null, strSelect = null;
+    public String strName = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
@@ -53,12 +53,15 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(true);
             selectName.setBounds(75,0,200,100);
-            strSelect = "seeker1";
-            System.out.println(strSelect);
-            imgS1 = new ImageIcon("seeker1.png");
-            
+            panel.strSelect = "seeker1";
+            System.out.println(panel.strSelect);
             frame.validate();
-
+/*
+            imgS1 = new ImageIcon("seeker1.png");
+            s1 = new JLabel(imgS1);
+            s1.setBounds(320, 320, 80, 80);
+            panel.add(s1);
+*/
             
         }else if(evt.getSource() == char2){
             char1.setEnabled(true);
@@ -66,18 +69,24 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(true);
             selectName.setBounds(380,0,200,100);
-            strSelect = "seeker2";
-            System.out.println(strSelect);
+            panel.strSelect = "seeker2";
+            System.out.println(panel.strSelect);
             //imgS1.setIconImage("seeker2.png");
             frame.validate();
+/*
+            imgS1 = new ImageIcon("seeker2.png");
+            s1 = new JLabel(imgS1);
+            s1.setBounds(320, 320, 80, 80);
+            panel.add(s1);
+*/
         }else if(evt.getSource() == char3){
             char1.setEnabled(true);
             char2.setEnabled(true);
             char3.setEnabled(false);
             char4.setEnabled(true);
             selectName.setBounds(700,0,200,100);
-            strSelect = "hider1";
-            System.out.println(strSelect);
+            panel.strSelect = "hider1";
+            System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == char4){
             char1.setEnabled(true);
@@ -85,11 +94,11 @@ public class scary implements ActionListener, KeyListener{
             char3.setEnabled(true);
             char4.setEnabled(false);
             selectName.setBounds(1020,0,200,100);
-            strSelect = "hider2";
-            System.out.println(strSelect);
+            panel.strSelect = "hider2";
+            System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == lockIn){
-            System.out.println("playing as "+strSelect);
+            System.out.println("playing as "+panel.strSelect);
             frame.setContentPane(panel);
             frame.addKeyListener(this);
             frame.validate();
@@ -100,7 +109,7 @@ public class scary implements ActionListener, KeyListener{
     }
     
     public String getSelect(){
-        return strSelect;
+        return panel.strSelect;
     }
 
     public void keyPressed(KeyEvent evt){
@@ -116,13 +125,13 @@ public class scary implements ActionListener, KeyListener{
         System.out.println(intStep);
         */
 
-        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
+        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w")/* && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
             panel.intPY += 1;
             sOn = false;
-        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
+        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") /*&& !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
             panel.intPY -= 1;
             wOn = false;
-        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
+        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") /*&& !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")*/){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
@@ -239,12 +248,12 @@ public class scary implements ActionListener, KeyListener{
 
         frame.requestFocus();
         frame.addKeyListener(this);
-
-        imgS1 = new ImageIcon("seeker1.png");
+/*
+        imgS1 = new ImageIcon("hider1.png");
         s1 = new JLabel(imgS1);
         s1.setBounds(320, 320, 80, 80);
         panel.add(s1);
-
+*/
         tagb = new JButton("Tag");
         //tagb.setBounds()
       

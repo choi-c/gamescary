@@ -15,6 +15,7 @@ public class school extends JPanel{
     int flx = 1, fly = 1, ix = 1, iy = 1;
     String strBlock;
     //int intChoice = gameplay.chrChoice();
+    String strSelect = null;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -123,11 +124,17 @@ public class school extends JPanel{
         }
 
         // image of player does change
-        //if(intChoice == 1){
-            //g.drawImage(seeker1, 320, 320, 80, 80, null);
-        //}else{
-            //g.drawImage(hider1, 320, 320, 80, 80, null);
-        //}
+        if(strSelect.equals("seeker1")){
+            g.drawImage(seeker1, 320, 320, 80, 80, null);
+        }else if(strSelect.equals("hider1")){
+            g.drawImage(hider1, 320, 320, 80, 80, null);
+        }else if(strSelect.equals("seeker2")){
+            g.drawImage(seeker2, 320, 320, 80, 80, null);
+        }else if(strSelect.equals("hider2")){
+            g.drawImage(hider2, 320, 320, 80, 80, null);
+        }else{
+            System.out.println("Character not selected error");
+        }
         /*
         if(scary.getSelect().equals("hider1")){
             g.drawImage(hider1, 320, 320, 80, 80, null);
