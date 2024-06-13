@@ -16,7 +16,7 @@ public class school extends JPanel{
     String strBlock;
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
-    Boolean blnVisibility = false, blnPi = false, blnPfl = false;
+    Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -68,15 +68,15 @@ public class school extends JPanel{
             System.out.println("File not found");
         }
 
-        // Flashligh Image
-        while(!strMap[flx][fly].equals("f")){
-            flx = (int)(Math.random()*37+1);
-            fly = (int)(Math.random()*50+1);
+        // Flashlight Image
+        while(!strMap[fly][flx].equals("f")){
+            flx = (int)(Math.random()*49+1);
+            fly = (int)(Math.random()*36+1);
         }
         // Ice Image
-        while(!strMap[ix][iy].equals("f")){
-            ix = (int)(Math.random()*37+1);
-            iy = (int)(Math.random()*50+1);
+        while(!strMap[iy][ix].equals("f")){
+            ix = (int)(Math.random()*49+1);
+            iy = (int)(Math.random()*36+1);
         }
 
         int intX = 0;
@@ -108,7 +108,7 @@ public class school extends JPanel{
                             }
                             //blnPfl = gameplay.characterBuffs();
                             //blnPi = gameplay.characterBuffs();
-                            if(blnPfl == false){
+                            if(blnPfl == false && blnPflTaken == false){
                                 if(flx == intCol && fly == intRow){
                                     g.drawImage(flashlight, intX, intY, 80, 80, null);
                                 }
@@ -158,6 +158,50 @@ public class school extends JPanel{
                 g.drawImage(desk, 320, 320, 80, 80, null);
             }
         }
+
+        // Power-ups
+        if(intPX == flx && intPY == fly  && blnPflTaken == false){
+            blnPfl = true;
+            blnPflTaken = true;
+            blnVisibility = true;
+            g.drawImage(floor, 320, 320, 80, 80, null);
+            if(strSelect.equals("seeker1")){
+                g.drawImage(seeker1, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("hider1")){
+                g.drawImage(hider1, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("seeker2")){
+                g.drawImage(seeker2, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("hider2")){
+                g.drawImage(hider2, 320, 320, 80, 80, null);
+            }else{
+                System.out.println("Character not selected error"); 
+            }
+        }else if(intPX == ix && intPY == iy){
+            blnPi = true;
+            g.drawImage(floor, 320, 320, 80, 80, null);
+            if(strSelect.equals("seeker1")){
+                g.drawImage(seeker1, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("hider1")){
+                g.drawImage(hider1, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("seeker2")){
+                g.drawImage(seeker2, 320, 320, 80, 80, null);
+            }else if(strSelect.equals("hider2")){
+                g.drawImage(hider2, 320, 320, 80, 80, null);
+            }else{
+                System.out.println("Character not selected error"); 
+            }
+        }
+
+        // Principal
+        for(int i = -1; i <= 2; i++){
+            for(int j = -1; j <= 2; j++){
+                if(strMap[intPY + i][intPX + j].equals("p")){
+                    blnPfl = false;
+                    blnVisibility = false;
+                }
+            }
+        }
+        
 
     }
 
