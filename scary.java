@@ -15,14 +15,15 @@ public class scary implements ActionListener, KeyListener{
     school panel;
     help helpPanel;
     JTextArea chat = new JTextArea();
+    JScrollPane scrollChat = new JScrollPane(chat);
     start startPanel;
     characterselect characterPanel;
     JButton connectb,tagb, helpb;
-    JTextField ip = null,port = null,name = null;
+    JTextField ip = null,port = null,name = null, msg = new JTextField("Send Message");
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
-    public String strName = null;
+    public String strName = null, strMsg = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
@@ -30,7 +31,7 @@ public class scary implements ActionListener, KeyListener{
     ImageIcon imgS1,imgS2,imgH1,imgH2;
     JLabel s1,s2,h1,h2;
 
-    //SuperSocketMaster ssm;
+    SuperSocketMaster ssm;
 
     // Methods
     public void actionPerformed(ActionEvent evt){
@@ -63,8 +64,12 @@ public class scary implements ActionListener, KeyListener{
             if(!strName.equals(null)){
                 if(!ip.getText().equals(null) && !port.getText().equals(null)){
                     System.out.println("connect as player");
+                    ssm = new SuperSocketMaster(ip.getText(), Integer.parseInt(port.getText()),this);
+                    ssm.connect();
                 }else if (ip.getText().equals(null) && !port.getText().equals(null)){
                     System.out.println("connect as host");
+                    ssm = new SuperSocketMaster(Integer.parseInt(port.getText()),this);
+                    ssm.connect();
                 }else{
                     System.out.println("Enter ip, port, or name");
                 }
@@ -128,7 +133,15 @@ public class scary implements ActionListener, KeyListener{
             frame.addKeyListener(this);
             frame.validate();
         }
-        if(evt.getSource() == send){
+
+        if(evt.getSource() == msg){
+            strMsg = msg.getText();
+        }else if(evt.getSource() == ssm){
+            chat.append(strName +": "+ ssm.readText() + "\n");
+        }else if(evt.getSource() == send){
+            ssm.sendText(strMsg);
+            msg.setText("");
+            chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
         }
     }
@@ -293,11 +306,15 @@ public class scary implements ActionListener, KeyListener{
         panel = new school();
         panel.setLayout(null);
     
-        chat.setBounds(920,0,720,960);
+        chat.setBounds(920,0,360,565);
         panel.add(chat);
 
+        msg.setBounds(920,570, 360,100);
+        msg.addActionListener(this);
+        panel.add(msg);
+
         send = new JButton("SEND");
-        send.setBounds(850,320,50,50);
+        send.setBounds(920,670,360,50);
         send.addActionListener(this);
         panel.add(send);
 
