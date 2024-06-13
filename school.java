@@ -16,7 +16,7 @@ public class school extends JPanel{
     String strBlock;
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
-    Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false;
+    Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -176,8 +176,9 @@ public class school extends JPanel{
             }else{
                 System.out.println("Character not selected error"); 
             }
-        }else if(intPX == ix && intPY == iy){
+        }else if(intPX == ix && intPY == iy && blnPiTaken == false){
             blnPi = true;
+            blnPiTaken = true;
             g.drawImage(floor, 320, 320, 80, 80, null);
             if(strSelect.equals("seeker1")){
                 g.drawImage(seeker1, 320, 320, 80, 80, null);
@@ -189,6 +190,11 @@ public class school extends JPanel{
                 g.drawImage(hider2, 320, 320, 80, 80, null);
             }else{
                 System.out.println("Character not selected error"); 
+            }
+            // freezing player when 
+            try{
+                Thread.sleep(5000);
+            }catch(InterruptedException e){
             }
         }
 
