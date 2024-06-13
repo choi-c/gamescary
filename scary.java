@@ -21,7 +21,7 @@ public class scary implements ActionListener, KeyListener{
     JTextField ip = null,port = null,name = null;
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
-    JButton next;
+    JButton next, continueb, back;
     public String strName = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
@@ -42,6 +42,22 @@ public class scary implements ActionListener, KeyListener{
             helpPanel.intPage ++;
             System.out.println("Help page: "+helpPanel.intPage);
             helpPanel.repaint();
+            if(helpPanel.intPage > 4){
+                frame.setContentPane(startPanel);
+                helpPanel.intPage = 1;
+            }
+            if(helpPanel.intPage == 4){
+                next.setText("Continue to game");
+            }else if(helpPanel.intPage != 4){
+                next.setText("Next");
+            }
+        }else if(evt.getSource() == back){
+            helpPanel.intPage --;
+            helpPanel.repaint();
+            if(helpPanel.intPage <= 0){
+                frame.setContentPane(startPanel);
+                helpPanel.intPage ++;
+            }
         }
         if(evt.getSource() == connectb){
             if(!strName.equals(null)){
@@ -212,10 +228,17 @@ public class scary implements ActionListener, KeyListener{
         helpPanel.setLayout(null);
         helpPanel.setPreferredSize(new Dimension(1280, 720));
 
+        // next button to continue to next page in help screen
         next = new JButton("Next");
-        next.setBounds(540, 600, 200,75);
+        next.setBounds(640, 600, 200,75);
         next.addActionListener(this);
         helpPanel.add(next);
+
+        // back button to return to previous help screen page
+        back = new JButton("Back");
+        back.setBounds(390,600,200,75);
+        back.addActionListener(this);
+        helpPanel.add(back);
 
         // connect button to continue to game
         connectb = new JButton("Connect");
