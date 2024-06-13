@@ -38,6 +38,11 @@ public class scary implements ActionListener, KeyListener{
             frame.setContentPane(helpPanel);
             frame.validate();
         }
+        if(evt.getSource() == next){
+            helpPanel.intPage ++;
+            System.out.println("Help page: "+helpPanel.intPage);
+            helpPanel.repaint();
+        }
         if(evt.getSource() == connectb){
             if(!strName.equals(null)){
                 if(!ip.getText().equals(null) && !port.getText().equals(null)){
@@ -208,7 +213,7 @@ public class scary implements ActionListener, KeyListener{
         helpPanel.setPreferredSize(new Dimension(1280, 720));
 
         next = new JButton("Next");
-        next.setBounds(540, 550, 200,75);
+        next.setBounds(540, 600, 200,75);
         next.addActionListener(this);
         helpPanel.add(next);
 
