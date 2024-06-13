@@ -11,13 +11,9 @@ public class gameplay extends scary{
         if(panel.intPX == panel.flx && panel.intPY == panel.fly){
             //character on flashlight powerup
             return true;
-            //panel.blnPfl = true;
-            //System.out.println(panel.blnPfl);
         }else if(panel.intPX == panel.ix && panel.intPY == panel.iy){
             //character on ice powerup
             return true;
-            //panel.blnPi = true;
-            //System.out.println(panel.blnPi);
         }
         /*
         // if seeker chooses eyeball skin
@@ -34,10 +30,16 @@ public class gameplay extends scary{
         }*/
         return false;
     }
-    public boolean tag(int intChrChoice,int intH1X,int intH1Y,int intS1X,int intS1,int intH2X,int intH2Y){
+    public boolean tag(int intH1X,int intH1Y,int intS1X,int intS1Y,int intH2X,int intH2Y,int intS2X, int intS2Y){
         if(intS1X == intH1X && intS1Y == intH1Y){
             return true;
         }else if (intS1X == intH2X && intS1Y == intH2Y){
+            return true;
+        }
+
+        if(intS2X > (intH1X-1) && intS2Y < (intH1X+1) && intS2Y > (intH1Y-1) && intS2Y < (intH1Y+1)){
+            return true;
+        }else if(intS2X > (intH2X-1) && intS2Y < (intH2X+1) && intS2Y > (intH2Y-1) && intS2Y < (intH2Y+1)){
             return true;
         }
         return false;

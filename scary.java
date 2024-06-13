@@ -130,6 +130,7 @@ public class scary implements ActionListener, KeyListener{
         }else if(evt.getSource() == lockIn){
             System.out.println("playing as "+panel.strSelect);
             frame.setContentPane(panel);
+            frame.requestFocus();
             frame.addKeyListener(this);
             frame.validate();
         }
@@ -151,18 +152,6 @@ public class scary implements ActionListener, KeyListener{
     }
 
     public void keyPressed(KeyEvent evt){
-        //System.out.println("A key was pressed");
-        /*
-        System.out.println(panel.strBlock);
-        if(panel.strBlock.equals("w") || panel.strBlock.equals("s") || panel.strBlock.equals("c")){
-            //panel.intPY += intStep;
-            intStep = -1;
-        }else if(panel.strBlock.equals("f") || panel.strBlock.equals("l") || panel.strBlock.equals("d")){
-            intStep = 1;
-        }
-        System.out.println(intStep);
-        */
-
         if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
             panel.intPY += 1;
             sOn = false;
@@ -327,7 +316,9 @@ public class scary implements ActionListener, KeyListener{
         panel.add(s1);
 */
         tagb = new JButton("Tag");
-        //tagb.setBounds()
+        tagb.setBounds(770,0,100,50);
+        tagb.addActionListener(this);
+        panel.add(tagb);
       
         frame.setContentPane(startPanel);
         frame.pack();
