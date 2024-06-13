@@ -139,7 +139,7 @@ public class scary implements ActionListener, KeyListener{
         }else if(evt.getSource() == ssm){
             chat.append(strName +": "+ ssm.readText() + "\n");
         }else if(evt.getSource() == send){
-            ssm.sendText(strMsg);
+            ssm.sendText(strName + ": "+ strMsg);
             msg.setText("");
             chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
