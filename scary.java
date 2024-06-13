@@ -15,6 +15,7 @@ public class scary implements ActionListener, KeyListener{
     school panel;
     help helpPanel;
     JTextArea chat = new JTextArea();
+    JScrollPane scrollChat = new JScrollPane(chat);
     start startPanel;
     characterselect characterPanel;
     JButton connectb,tagb, helpb;
@@ -22,7 +23,7 @@ public class scary implements ActionListener, KeyListener{
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
-    public String strName = null;
+    public String strName = null, strMsg = null;
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
@@ -132,7 +133,15 @@ public class scary implements ActionListener, KeyListener{
             frame.addKeyListener(this);
             frame.validate();
         }
-        if(evt.getSource() == send){
+
+        if(evt.getSource() == msg){
+            strMsg = msg.getText();
+        }else if(evt.getSource() == ssm){
+            chat.append(strName +": "+ ssm.readText() + "\n");
+        }else if(evt.getSource() == send){
+            ssm.sendText(strMsg);
+            msg.setText("");
+            chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
         }
     }
