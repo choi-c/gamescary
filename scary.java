@@ -32,6 +32,8 @@ public class scary implements ActionListener, KeyListener{
     JLabel s1,s2,h1,h2;
     String[] strSplit;
     int intCount;
+    String strMsgType;
+    String strHX,strHY;
 
     SuperSocketMaster ssm;
 
@@ -155,12 +157,12 @@ public class scary implements ActionListener, KeyListener{
 
         if(evt.getSource() == msg){
             strMsg = msg.getText();
-        }else if(evt.getSource() == ssm){
+        }/*else if(evt.getSource() == ssm){
             //chat.append(ssm.readText() + "\n");
             strSplit = ssm.readText().split(",");
             for(intCount = 0; intCount < 5; intCount ++){
                 strSplit = ssm.readText().split(",");
-                msgType = strSplit[0];
+                strMsgType = strSplit[0];
                 strName = strSplit[1];
                 strMsg = strSplit[2];
             }
@@ -169,6 +171,40 @@ public class scary implements ActionListener, KeyListener{
             msg.setText("");
             chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
+        }*/
+
+        if(evt.getSource() == ssm){
+            String[] strMsg = ssm.readText().split(",");
+            if(strMsg[0].equals("strSelect")){
+                if(strMsg[1].equals("host")){
+                    if(strMsg[2].equals("seeker1")){
+                        char1.setEnabled(false);
+                    }else if(strMsg[2].equals("seeker2")){
+                        char2.setEnabled(false);
+                    }else if(strMsg[2].equals("hider1")){
+                        char3.setEnabled(false);
+                    }else if(strMsg[2].equals("hider2")){
+                        char4.setEnabled(false);
+                    }
+                }else if(strMsg[1].equals("client")){
+                    if(strMsg[2].equals("seeker1")){
+                        char1.setEnabled(false);
+                    }else if(strMsg[2].equals("seeker2")){
+                        char2.setEnabled(false);
+                    }else if(strMsg[2].equals("hider1")){
+                        char3.setEnabled(false);
+                    }else if(strMsg[2].equals("hider2")){
+                        char4.setEnabled(false);
+                    }
+                }
+            }else if(strMsg[0].equals("game")){
+                if(strMsg[1].equals("host")){
+                    panel.intHX = Integer.parseInt(strHX);
+                    panel.intHY = Integer.parseInt(str)
+                }else if(strMsg[1].equals("client")){
+
+                }
+            }
         }
     }
     
