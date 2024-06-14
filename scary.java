@@ -34,7 +34,7 @@ public class scary implements ActionListener, KeyListener{
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
     public String strName = null, strMsg = null, strPH = "";
-    boolean blnTyped = false;
+    boolean blnTyped = false, blnConnected = false, blnOConnected = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
     String[][] strMap = new String[51][51];
@@ -44,6 +44,7 @@ public class scary implements ActionListener, KeyListener{
     int intCount;
     String strMsgType;
     String strHX,strHY,strSX,strSY;
+    Timer timer = new Timer(1000/60,this);
 
     SuperSocketMaster ssm;
 
@@ -79,23 +80,28 @@ public class scary implements ActionListener, KeyListener{
             }
         }
         if(evt.getSource() == connectb){
-            if(!strName.equals(null)){
-                if(!ip.getText().equals("") && !port.getText().equals("")){
-                    strPH = "player";
-                    System.out.println("connect as player");
-                    ssm = new SuperSocketMaster(ip.getText(), Integer.parseInt(port.getText()),this);
-                    ssm.connect();
-                }else if (ip.getText().equals("") && !port.getText().equals("")){
-                    strPH = "host";
-                    System.out.println("connect as host");
-                    ssm = new SuperSocketMaster(Integer.parseInt(port.getText()),this);
-                    ssm.connect();
-                }else{
-                    System.out.println("Enter ip, port, or name");
+            blnConnected = true;
+            ssm.sendText("connect"+","+strPH+","+blnConnected);
+            if(blnConnected == true && blnOConnected == true){
+                timer.start();
+                if(!strName.equals(null)){
+                    if(!ip.getText().equals("") && !port.getText().equals("")){
+                        strPH = "player";
+                        System.out.println("connect as player");
+                        ssm = new SuperSocketMaster(ip.getText(), Integer.parseInt(port.getText()),this);
+                        ssm.connect();
+                    }else if (ip.getText().equals("") && !port.getText().equals("")){
+                        strPH = "host";
+                        System.out.println("connect as host");
+                        ssm = new SuperSocketMaster(Integer.parseInt(port.getText()),this);
+                        ssm.connect();
+                    }else{
+                        System.out.println("Enter ip, port, or name");
+                    }
+                    System.out.println(strName);
+                    frame.setContentPane(characterPanel);
+                    frame.validate();
                 }
-                System.out.println(strName);
-                frame.setContentPane(characterPanel);
-                frame.validate();
             }
         }else if(evt.getSource() == name){
             strName = name.getText();
@@ -173,6 +179,11 @@ public class scary implements ActionListener, KeyListener{
             frame.validate();
         }
 
+        if(evt.getSource() == timer){
+            String strPX = panel.intPX+"", strPY = panel.intPY+"";
+            ssm.sendText("game,"+strPH+","+ panel.strSelect+","+ strPX+","+ strPY);
+        }
+
         if(evt.getSource() == msg){
             strMsg = msg.getText();
         }else if(evt.getSource() == send){
@@ -227,6 +238,8 @@ public class scary implements ActionListener, KeyListener{
                 }
             }else if(strNMsg[0].equals("chat")){
                 chat.append(strNMsg[2] +": "+ strNMsg[3] + "\n");
+            }else if(strNMsg[0].equals("connect")){
+                blnOConnected = true;
             }
         }
     }

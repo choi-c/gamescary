@@ -10,4 +10,7 @@ game,flashlight,24,31
 chrSelect,strPH,strSelect
 chrSelect,host,seeker1
 
+connect,strPH,blnConnected
+connect,host,true
+
 - tag button (stop game)
