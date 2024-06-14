@@ -13,7 +13,7 @@ public class school extends JPanel{
     int intPX = 5;
     int intPY = 32;
     int flx = 1, fly = 1, ix = 1, iy = 1;
-    String strBlock;
+    String strBlock, strOChar;
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
     Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
@@ -137,11 +137,18 @@ public class school extends JPanel{
                                     g.drawImage(ice, intX, intY, 80, 80, null);
                                 }
                             }
-
                             if(intHX == intCol && intHY == intRow){
-                                //g.drawImage()
+                                if(strOChar.equals("hider1")){
+                                    g.drawImage(hider1, intX, intY, 80, 80, null);
+                                }else if(strOChar.equals("hider2")){
+                                    g.drawImage(hider2, intX, intY, 80, 80, null);
+                                }
                             }if(intSX == intCol && intSY == intRow){
-                                //g.drawImage()
+                                if(strOChar.equals("seeker1")){
+                                    g.drawImage(seeker1, intX, intY, 80, 80, null);
+                                }else if(strOChar.equals("seeker2")){
+                                    g.drawImage(seeker2, intX, intY, 80, 80, null);
+                                }
                             }
                         //}
                         intX = intX + 80;
