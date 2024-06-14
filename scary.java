@@ -33,7 +33,7 @@ public class scary implements ActionListener, KeyListener{
     String[] strSplit;
     int intCount;
     String strMsgType;
-    String strHX,strHY;
+    String strHX,strHY,strSX,strSY;
 
     SuperSocketMaster ssm;
 
@@ -96,6 +96,7 @@ public class scary implements ActionListener, KeyListener{
                 char4.setEnabled(false);
                 panel.strSelect = "seeker1";
             }
+            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
             selectName.setBounds(75,0,200,100);
             System.out.println(panel.strSelect);
             panel.intPX = 24;
@@ -113,6 +114,7 @@ public class scary implements ActionListener, KeyListener{
                 char4.setEnabled(false);
                 panel.strSelect = "seeker2";
             }
+            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
             selectName.setBounds(380,0,200,100);
             System.out.println(panel.strSelect);
             panel.intPX = 24;
@@ -130,6 +132,7 @@ public class scary implements ActionListener, KeyListener{
                 char3.setEnabled(false);
                 char4.setEnabled(false);
             }
+            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
             selectName.setBounds(700,0,200,100);
             System.out.println(panel.strSelect);
             frame.validate();
@@ -144,6 +147,7 @@ public class scary implements ActionListener, KeyListener{
                 char3.setEnabled(false);
                 char4.setEnabled(false);
             }
+            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
             selectName.setBounds(1020,0,200,100);
             System.out.println(panel.strSelect);
             frame.validate();
@@ -175,7 +179,7 @@ public class scary implements ActionListener, KeyListener{
 
         if(evt.getSource() == ssm){
             String[] strMsg = ssm.readText().split(",");
-            if(strMsg[0].equals("strSelect")){
+            if(strMsg[0].equals("chrSelect")){
                 if(strMsg[1].equals("host")){
                     if(strMsg[2].equals("seeker1")){
                         char1.setEnabled(false);
@@ -199,10 +203,21 @@ public class scary implements ActionListener, KeyListener{
                 }
             }else if(strMsg[0].equals("game")){
                 if(strMsg[1].equals("host")){
-                    panel.intHX = Integer.parseInt(strHX);
-                    panel.intHY = Integer.parseInt(strHY);
+                    if(strMsg[2].equals("seeker1") || strMsg[2].equals("seeker2")){
+                        panel.intSX = Integer.parseInt(strSX);
+                        panel.intSY = Integer.parseInt(strSY);
+                    }else if(strMsg[2].equals("hider1") || strMsg[2].equals("hider2")){
+                        panel.intHX = Integer.parseInt(strHX);
+                        panel.intHY = Integer.parseInt(strHY);
+                    }
                 }else if(strMsg[1].equals("client")){
-
+                    if(strMsg[2].equals("seeker1") || strMsg[2].equals("seeker2")){
+                        panel.intSX = Integer.parseInt(strSX);
+                        panel.intSY = Integer.parseInt(strSY);
+                    }else if(strMsg[2].equals("hider1") || strMsg[2].equals("hider2")){
+                        panel.intHX = Integer.parseInt(strHX);
+                        panel.intHY = Integer.parseInt(strHY);
+                    }
                 }
             }
         }
@@ -218,21 +233,25 @@ public class scary implements ActionListener, KeyListener{
             sOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
+            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("c")){
             panel.intPY -= 1;
             wOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
+            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("c")){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
             System.out.println(panel.ix+","+panel.iy);
+            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("c")){
             panel.intPX += 1;
             dOn = false;
             System.out.println(panel.intPX);
             System.out.println(panel.ix+","+panel.iy);
+            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }
         
         panel.repaint();

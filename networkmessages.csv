@@ -1,12 +1,13 @@
 chat,strPH,playername, message
 chat,host,michelle,"hello"
 
-game,strPH, playertype, intX, intY
-game,client,seeker, 200,300
+game,strPH, strSelect, intX, intY
+game,client,seeker2, 12,19
 
 game,item,intX,intY
 game,flashlight,24,31
 
-strSelect,strPH,strSelect
+chrSelect,strPH,strSelect
+chrSelect,host,seeker1
 
 - tag button (stop game)
