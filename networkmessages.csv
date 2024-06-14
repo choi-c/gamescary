@@ -1,5 +1,5 @@
 chat,playername, message
 chat,michelle,"hello"
 
-game,playername, intX, intY, playertype
-game,michelle,200,300,seeker
+game,playername, intPX, intPY, character
+game,michelle,20,10,seeker1

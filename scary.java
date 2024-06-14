@@ -30,6 +30,8 @@ public class scary implements ActionListener, KeyListener{
     String[][] strMap = new String[51][51];
     ImageIcon imgS1,imgS2,imgH1,imgH2;
     JLabel s1,s2,h1,h2;
+    String[] strSplit;
+    int intCount;
 
     SuperSocketMaster ssm;
 
@@ -154,9 +156,16 @@ public class scary implements ActionListener, KeyListener{
         if(evt.getSource() == msg){
             strMsg = msg.getText();
         }else if(evt.getSource() == ssm){
-            chat.append(strName +": "+ ssm.readText() + "\n");
+            //chat.append(ssm.readText() + "\n");
+            strSplit = ssm.readText().split(",");
+            for(intCount = 0; intCount < 5; intCount ++){
+                strSplit = ssm.readText().split(",");
+                msgType = strSplit[0];
+                strName = strSplit[1];
+                strMsg = strSplit[2];
+            }
         }else if(evt.getSource() == send){
-            ssm.sendText(strName + ": "+ strMsg);
+            ssm.sendText("chat," + strName + ","+ strMsg);
             msg.setText("");
             chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
