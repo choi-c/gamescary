@@ -110,9 +110,9 @@ public class scary implements ActionListener, KeyListener{
                 char4.setEnabled(false);
                 panel.strSelect = "seeker1";
             }
-            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            selectName.setBounds(75,0,200,100);
-            System.out.println(panel.strSelect);
+            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
+            //selectName.setBounds(75,0,200,100);
+            //System.out.println(panel.strSelect);
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
@@ -128,9 +128,9 @@ public class scary implements ActionListener, KeyListener{
                 char4.setEnabled(false);
                 panel.strSelect = "seeker2";
             }
-            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            selectName.setBounds(380,0,200,100);
-            System.out.println(panel.strSelect);
+            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
+            //selectName.setBounds(380,0,200,100);
+            //System.out.println(panel.strSelect);
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
@@ -146,9 +146,9 @@ public class scary implements ActionListener, KeyListener{
                 char3.setEnabled(false);
                 char4.setEnabled(false);
             }
-            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            selectName.setBounds(700,0,200,100);
-            System.out.println(panel.strSelect);
+            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
+            //selectName.setBounds(700,0,200,100);
+            //System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == char4){
             if(strPH.equals("player")){
@@ -161,9 +161,9 @@ public class scary implements ActionListener, KeyListener{
                 char3.setEnabled(false);
                 char4.setEnabled(false);
             }
-            ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            selectName.setBounds(1020,0,200,100);
-            System.out.println(panel.strSelect);
+            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
+            //selectName.setBounds(1020,0,200,100);
+            //System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == lockIn){
             System.out.println("playing as "+panel.strSelect);
@@ -175,21 +175,12 @@ public class scary implements ActionListener, KeyListener{
 
         if(evt.getSource() == msg){
             strMsg = msg.getText();
-        }/*else if(evt.getSource() == ssm){
-            //chat.append(ssm.readText() + "\n");
-            strSplit = ssm.readText().split(",");
-            for(intCount = 0; intCount < 5; intCount ++){
-                strSplit = ssm.readText().split(",");
-                strMsgType = strSplit[0];
-                strName = strSplit[1];
-                strMsg = strSplit[2];
-            }
         }else if(evt.getSource() == send){
-            ssm.sendText("chat," + strName + ","+ strMsg);
+            ssm.sendText("chat," + strPH +","+ strName + ","+ strMsg);
             msg.setText("");
             chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
-        }*/
+        }
 
         if(evt.getSource() == ssm){
             String[] strMsg = ssm.readText().split(",");
