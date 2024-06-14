@@ -33,6 +33,7 @@ public class school extends JPanel{
             }
         }
     }
+    /*
     public void xcoord(){
         // if player is a seeker, specify coords as seeker coords (x-coordinate)
         if(strSelect.equals("seeker1") || strSelect.equals("seeker2")){
@@ -49,6 +50,7 @@ public class school extends JPanel{
             intPY = intHY;
         }
     }
+        */
 
     
     // painting the map
@@ -134,6 +136,12 @@ public class school extends JPanel{
                                 if(ix == intCol && iy == intRow){
                                     g.drawImage(ice, intX, intY, 80, 80, null);
                                 }
+                            }
+
+                            if(intHX == intCol && intHY == intRow){
+                                //g.drawImage()
+                            }if(intSX == intCol && intSY == intRow){
+                                //g.drawImage()
                             }
                         //}
                         intX = intX + 80;
