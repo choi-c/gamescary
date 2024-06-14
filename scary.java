@@ -200,7 +200,7 @@ public class scary implements ActionListener, KeyListener{
             }else if(strMsg[0].equals("game")){
                 if(strMsg[1].equals("host")){
                     panel.intHX = Integer.parseInt(strHX);
-                    panel.intHY = Integer.parseInt(str)
+                    panel.intHY = Integer.parseInt(strHY);
                 }else if(strMsg[1].equals("client")){
 
                 }

@@ -17,6 +17,7 @@ public class school extends JPanel{
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
     Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
+    int intHX, intHY, intSX, intSY;
 
     // Methods
     public BufferedImage loadImage(String strFileName){
