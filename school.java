@@ -33,6 +33,22 @@ public class school extends JPanel{
             }
         }
     }
+    public void xcoord(){
+        // if player is a seeker, specify coords as seeker coords (x-coordinate)
+        if(strSelect.equals("seeker1") || strSelect.equals("seeker2")){
+            intPX = intSX;
+        }else{
+            intPX = intHX;
+        }
+    }
+    public void ycoord(){
+        // if player is a seeker, specify x-coord as seeker coords
+        if(strSelect.equals("seeker1") || strSelect.equals("seeker2")){
+            intPY = intSY;
+        }else{
+            intPY = intHY;
+        }
+    }
 
     
     // painting the map
