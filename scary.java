@@ -183,48 +183,50 @@ public class scary implements ActionListener, KeyListener{
         }
 
         if(evt.getSource() == ssm){
-            String[] strMsg = ssm.readText().split(",");
-            if(strMsg[0].equals("chrSelect")){
-                if(strMsg[1].equals("host")){
-                    if(strMsg[2].equals("seeker1")){
+            String[] strNMsg = ssm.readText().split(",");
+            if(strNMsg[0].equals("chrSelect")){
+                if(strNMsg[1].equals("host")){
+                    if(strNMsg[2].equals("seeker1")){
                         char1.setEnabled(false);
-                    }else if(strMsg[2].equals("seeker2")){
+                    }else if(strNMsg[2].equals("seeker2")){
                         char2.setEnabled(false);
-                    }else if(strMsg[2].equals("hider1")){
+                    }else if(strNMsg[2].equals("hider1")){
                         char3.setEnabled(false);
-                    }else if(strMsg[2].equals("hider2")){
+                    }else if(strNMsg[2].equals("hider2")){
                         char4.setEnabled(false);
                     }
-                }else if(strMsg[1].equals("client")){
-                    if(strMsg[2].equals("seeker1")){
+                }else if(strNMsg[1].equals("client")){
+                    if(strNMsg[2].equals("seeker1")){
                         char1.setEnabled(false);
-                    }else if(strMsg[2].equals("seeker2")){
+                    }else if(strNMsg[2].equals("seeker2")){
                         char2.setEnabled(false);
-                    }else if(strMsg[2].equals("hider1")){
+                    }else if(strNMsg[2].equals("hider1")){
                         char3.setEnabled(false);
-                    }else if(strMsg[2].equals("hider2")){
+                    }else if(strNMsg[2].equals("hider2")){
                         char4.setEnabled(false);
                     }
                 }
-            }else if(strMsg[0].equals("game")){
-                panel.strOChar = strMsg[2];
-                if(strMsg[1].equals("host")){
-                    if(strMsg[2].equals("seeker1") || strMsg[2].equals("seeker2")){
+            }else if(strNMsg[0].equals("game")){
+                panel.strOChar = strNMsg[2];
+                if(strNMsg[1].equals("host")){
+                    if(strNMsg[2].equals("seeker1") || strNMsg[2].equals("seeker2")){
                         panel.intSX = Integer.parseInt(strSX);
                         panel.intSY = Integer.parseInt(strSY);
-                    }else if(strMsg[2].equals("hider1") || strMsg[2].equals("hider2")){
+                    }else if(strNMsg[2].equals("hider1") || strNMsg[2].equals("hider2")){
                         panel.intHX = Integer.parseInt(strHX);
                         panel.intHY = Integer.parseInt(strHY);
                     }
-                }else if(strMsg[1].equals("client")){
-                    if(strMsg[2].equals("seeker1") || strMsg[2].equals("seeker2")){
+                }else if(strNMsg[1].equals("client")){
+                    if(strNMsg[2].equals("seeker1") || strNMsg[2].equals("seeker2")){
                         panel.intSX = Integer.parseInt(strSX);
                         panel.intSY = Integer.parseInt(strSY);
-                    }else if(strMsg[2].equals("hider1") || strMsg[2].equals("hider2")){
+                    }else if(strNMsg[2].equals("hider1") || strNMsg[2].equals("hider2")){
                         panel.intHX = Integer.parseInt(strHX);
                         panel.intHY = Integer.parseInt(strHY);
                     }
                 }
+            }else if(strNMsg[0].equals("chat")){
+                chat.append(strNMsg[2] +": "+ strNMsg[3] + "\n");
             }
         }
     }
