@@ -23,7 +23,7 @@ public class scary implements ActionListener, KeyListener{
     JLabel seekers,hiders, selectName;
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
-    public String strName = null, strMsg = null;
+    public String strName = null, strMsg = null, strPH = "";
     boolean blnTyped = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
@@ -62,11 +62,13 @@ public class scary implements ActionListener, KeyListener{
         }
         if(evt.getSource() == connectb){
             if(!strName.equals(null)){
-                if(!ip.getText().equals(null) && !port.getText().equals(null)){
+                if(!ip.getText().equals("") && !port.getText().equals("")){
+                    strPH = "player";
                     System.out.println("connect as player");
                     ssm = new SuperSocketMaster(ip.getText(), Integer.parseInt(port.getText()),this);
                     ssm.connect();
-                }else if (ip.getText().equals(null) && !port.getText().equals(null)){
+                }else if (ip.getText().equals("") && !port.getText().equals("")){
+                    strPH = "host";
                     System.out.println("connect as host");
                     ssm = new SuperSocketMaster(Integer.parseInt(port.getText()),this);
                     ssm.connect();
@@ -80,51 +82,65 @@ public class scary implements ActionListener, KeyListener{
         }else if(evt.getSource() == name){
             strName = name.getText();
         }else if(evt.getSource() == char1){
-            char1.setEnabled(false);
-            char2.setEnabled(true);
-            char3.setEnabled(true);
-            char4.setEnabled(true);
+            if(strPH.equals("player")){
+                char1.setEnabled(false);
+                char2.setEnabled(false);
+            }else if(strPH.equals("host")){
+                char1.setEnabled(false);
+                char2.setEnabled(true);
+                char3.setEnabled(false);
+                char4.setEnabled(false);
+                panel.strSelect = "seeker1";
+            }
             selectName.setBounds(75,0,200,100);
-            panel.strSelect = "seeker1";
             System.out.println(panel.strSelect);
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
-/*
-            imgS1 = new ImageIcon("seeker1.png");
-            s1 = new JLabel(imgS1);
-            s1.setBounds(320, 320, 80, 80);
-            panel.add(s1);
-*/
             
         }else if(evt.getSource() == char2){
-            char1.setEnabled(true);
-            char2.setEnabled(false);
-            char3.setEnabled(true);
-            char4.setEnabled(true);
+            if(strPH.equals("player")){
+                char1.setEnabled(false);
+                char2.setEnabled(false);
+            }else if(strPH.equals("host")){
+                char1.setEnabled(true);
+                char2.setEnabled(false);
+                char3.setEnabled(false);
+                char4.setEnabled(false);
+                panel.strSelect = "seeker2";
+            }
             selectName.setBounds(380,0,200,100);
-            panel.strSelect = "seeker2";
             System.out.println(panel.strSelect);
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
 
         }else if(evt.getSource() == char3){
-            char1.setEnabled(true);
-            char2.setEnabled(true);
-            char3.setEnabled(false);
-            char4.setEnabled(true);
+            if(strPH.equals("player")){
+                char1.setEnabled(false);
+                char2.setEnabled(false);
+                char3.setEnabled(false);
+                char4.setEnabled(true);
+                panel.strSelect = "hider1";
+            }else if(strPH.equals("host")){
+                char3.setEnabled(false);
+                char4.setEnabled(false);
+            }
             selectName.setBounds(700,0,200,100);
-            panel.strSelect = "hider1";
             System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == char4){
-            char1.setEnabled(true);
-            char2.setEnabled(true);
-            char3.setEnabled(true);
-            char4.setEnabled(false);
+            if(strPH.equals("player")){
+                char1.setEnabled(false);
+                char2.setEnabled(false);
+                char3.setEnabled(true);
+                char4.setEnabled(false);
+                panel.strSelect = "hider2";
+            }else if(strPH.equals("host")){
+                char3.setEnabled(false);
+                char4.setEnabled(false);
+            }
             selectName.setBounds(1020,0,200,100);
-            panel.strSelect = "hider2";
             System.out.println(panel.strSelect);
             frame.validate();
         }else if(evt.getSource() == lockIn){
