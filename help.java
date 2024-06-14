@@ -4,12 +4,24 @@ import java.io.*;
 import javax.imageio.*;
 import java.awt.image.*;
 
+/**
+* This class file loads the help screen after a button in the menu screen is clicked
+* Extension of a JPanel
+*/
+
+
 public class help extends JPanel{
     // Properties
     BufferedImage help1,help2,help3, help4, help5 = null;
     int intPage = 1;
 
     // Methods
+
+    /**
+    * Prints all the necessary images for the help screen
+    * @param g the graphics object
+    */
+
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);

@@ -1,3 +1,6 @@
+/**
+* This class is used for a variety of gameplay mechanics
+*/
 public class gameplay extends scary{
     // Properties
     boolean blnAlive = true;
@@ -6,6 +9,11 @@ public class gameplay extends scary{
     int intH2X,intH2Y;
 
     // Methods
+
+    /**
+    * Used to determine power-up status during gameplay
+    * @return boolean values depending on the power-up status
+    */
     public boolean characterBuffs(){
          
         if(panel.intPX == panel.flx && panel.intPY == panel.fly){
@@ -30,6 +38,10 @@ public class gameplay extends scary{
         }*/
         return false;
     }
+    /**
+    * Determines whether the players are vulnerable to being tagged by the monster
+    * @return boolean values depending on whether the player is able to be tagged
+    */
     public boolean tag(int intH1X,int intH1Y,int intS1X,int intS1Y,int intH2X,int intH2Y,int intS2X, int intS2Y){
         if(intS1X == intH1X && intS1Y == intH1Y){
             return true;
@@ -44,6 +56,10 @@ public class gameplay extends scary{
         }
         return false;
     }
+    /**
+    * Controls the boundaries for all players
+    * @return integer values based on where the player is
+    */
     public int boundaries(String strBlock){
         if(strBlock == "w" || strBlock == "s" || strBlock == "c"){
             //2 == dont move

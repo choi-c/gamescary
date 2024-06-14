@@ -9,6 +9,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Thread.*;
 
+/**
+* This class houses all the user interfaces for our program
+* Networking, buttons, character selection, gameplay and sending messages
+*
+* @author Carmen Choi, Michelle Zhang, Timothy Chhor
+* @version 1.1
+* @since 2024-06-14
+*/
+
+
 public class scary implements ActionListener, KeyListener{
     // Properties
     JFrame frame;
@@ -38,6 +48,10 @@ public class scary implements ActionListener, KeyListener{
     SuperSocketMaster ssm;
 
     // Methods
+    /**
+    * Tests for events from buttons and text fields used in gameplay, networking and menu options
+    * @param evt the event with data on what caused it, to differentiate between events
+    */
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == helpb){
             frame.setContentPane(helpPanel);
@@ -223,10 +237,17 @@ public class scary implements ActionListener, KeyListener{
         }
     }
     
+    /**
+    * Returns the result of which character the player chose
+    */
     public String getSelect(){
         return panel.strSelect;
     }
 
+    /**
+    * Checks for when keys are pressed and uses it to facilitate movements in the game
+    * @param evt the event with data on what caused it, to differentiate between events
+    */
     public void keyPressed(KeyEvent evt){
         if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
             panel.intPY += 1;
@@ -253,10 +274,13 @@ public class scary implements ActionListener, KeyListener{
             System.out.println(panel.ix+","+panel.iy);
             ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }
-        
         panel.repaint();
-
     }
+
+    /**
+    * Checks for when keys are released and uses it to facilitate movements in the game
+    * @param evt the event with data on what caused it, to differentiate between events
+    */
     public void keyReleased(KeyEvent evt){
         //System.out.println("A key was released");
         
@@ -273,6 +297,10 @@ public class scary implements ActionListener, KeyListener{
         
 
     }
+    /**
+    * Empty method
+    * @param evt the event with data on what caused it, to differentiate between events
+    */
     public void keyTyped(KeyEvent evt){
     }
 
