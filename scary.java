@@ -25,7 +25,7 @@ public class scary implements ActionListener, KeyListener{
     school panel;
     help helpPanel;
     JTextArea chat = new JTextArea();
-    JPanel gameoverPanel;
+    gameover gameoverPanel;
     JScrollPane scrollChat = new JScrollPane(chat);
     start startPanel;
     characterselect characterPanel;
@@ -166,6 +166,7 @@ public class scary implements ActionListener, KeyListener{
                 intCD ++;
                 timerLabel.setText("Timer: "+intCD);
                 if(intCD == 180){
+                    gameoverPanel.intScreen = 2;
                     frame.setContentPane(gameoverPanel);
                 }
             }
@@ -173,8 +174,9 @@ public class scary implements ActionListener, KeyListener{
                 if(panel.strSelect.equals("seeker1")){
                     if(panel.intPY == panel.intPY2 && panel.intPX == panel.intPX2){
                         tagging = 2;
+                        gameoverPanel.intScreen = 1;
                         frame.setContentPane(gameoverPanel);
-                        frame.validate();    
+                        frame.validate();
                     }
                 }
                 if(panel.strSelect.equals("seeker2")){
@@ -182,6 +184,7 @@ public class scary implements ActionListener, KeyListener{
                         for(int j = -1; j <= 2; j++){
                             if(panel.intPY + i == panel.intPY2 && panel.intPX + j == panel.intPX2){
                                 tagging = 2;
+                                gameoverPanel.intScreen = 1;
                                 frame.setContentPane(gameoverPanel);
                                 frame.validate();
                             }
