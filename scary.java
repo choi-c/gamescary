@@ -25,6 +25,7 @@ public class scary implements ActionListener, KeyListener{
     school panel;
     help helpPanel;
     JTextArea chat = new JTextArea();
+    JPanel gameoverPanel;
     JScrollPane scrollChat = new JScrollPane(chat);
     start startPanel;
     characterselect characterPanel;
@@ -36,6 +37,7 @@ public class scary implements ActionListener, KeyListener{
     public String strName = null, strMsg = null, strPH = "";
     boolean blnTyped = false, blnConnected = false, blnOConnected = false;
     boolean aOn, sOn, dOn, wOn;
+    int tagging = 0;
     int intStep = 1;
     String[][] strMap = new String[51][51];
     ImageIcon imgS1,imgS2,imgH1,imgH2;
@@ -44,7 +46,7 @@ public class scary implements ActionListener, KeyListener{
     int intCount;
     String strMsgType;
     String strHX,strHY,strSX,strSY;
-    Timer tmenu = new Timer(1000/60, this), tcoords = new Timer(1000/60,this);
+    Timer tmenu = new Timer(1000/60, this), tcoords = new Timer(1000/60,this), tfreeze = new Timer(5000,this);
 
     SuperSocketMaster ssm;
 
@@ -134,6 +136,12 @@ public class scary implements ActionListener, KeyListener{
             frame.addKeyListener(this);
             tmenu.stop();
             tcoords.start();
+            if(panel.strSelect.equals("seeker1") || panel.strSelect.equals("seeker2")){
+                tagb = new JButton("Tag");
+                tagb.setBounds(770,0,100,50);
+                tagb.addActionListener(this);
+                panel.add(tagb);
+            }
             frame.validate();
         }
 
@@ -149,6 +157,26 @@ public class scary implements ActionListener, KeyListener{
             ssm.sendText("chrSelect,"+panel.strSelect);
         }
         if(evt.getSource() == tcoords){
+            if(tagging == 1){
+                if(panel.strSelect.equals("seeker1")){
+                    if(panel.intPY == panel.intPY2 && panel.intPX == panel.intPX2){
+                        tagging = 2;
+                        frame.setContentPane(gameoverPanel);
+                        frame.validate();    
+                    }
+                }
+                if(panel.strSelect.equals("seeker2")){
+                    for(int i = -1; i <= 2; i++){
+                        for(int j = -1; j <= 2; j++){
+                            if(panel.intPY + i == panel.intPY2 && panel.intPX + j == panel.intPX2){
+                                tagging = 2;
+                                frame.setContentPane(gameoverPanel);
+                                frame.validate();
+                            }
+                        }
+                    }
+                }
+            }
             if(panel.blnPflTaken){
                 panel.intPflTaken = 1;
             }
@@ -165,10 +193,9 @@ public class scary implements ActionListener, KeyListener{
                     panel.ix = (int)(Math.random()*49+1);
                     panel.iy = (int)(Math.random()*36+1);
                 }
-            }else{
-                
             }
-            ssm.sendText("game,"+panel.strSelect+","+panel.intPX+","+panel.intPY+","+panel.intPflTaken+","+panel.intPiTaken+","+panel.flx+","+panel.fly+","+panel.ix+","+panel.iy);
+            panel.repaint();
+            ssm.sendText("game,"+panel.strSelect+","+panel.intPX+","+panel.intPY+","+panel.intPflTaken+","+panel.intPiTaken+","+panel.flx+","+panel.fly+","+panel.ix+","+panel.iy+","+tagging);
         }
         if(evt.getSource() == ssm){
             String[] strNMsg = ssm.readText().split(",");
@@ -216,7 +243,18 @@ public class scary implements ActionListener, KeyListener{
                     panel.ix = Integer.parseInt(strNMsg[8]);
                     panel.iy = Integer.parseInt(strNMsg[9]);
                 }
+                if(strNMsg[10].equals("2")){
+                    tagging = 2;
+                    frame.setContentPane(gameoverPanel);
+                    frame.validate();
+                }
             }
+        }if(evt.getSource() == tfreeze){
+            panel.canMove = true;
+            tfreeze.stop();
+        }
+        if(evt.getSource() == tagb){
+            tagging = 1;
         }
     }
     
@@ -232,26 +270,29 @@ public class scary implements ActionListener, KeyListener{
     * @param evt the event with data on what caused it, to differentiate between events
     */
     public void keyPressed(KeyEvent evt){
-        if(evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
+        if(panel.canMove && evt.getKeyChar() == 's' && sOn && !panel.strMap[panel.intPY + 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY + 1][panel.intPX].equals("c")){
             panel.intPY += 1;
             sOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-        }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("c")){
+        }else if(panel.canMove && evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("c")){
             panel.intPY -= 1;
             wOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-        }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("c")){
+        }else if(panel.canMove && evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("c")){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
             System.out.println(panel.ix+","+panel.iy);
-        }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("c")){
+        }else if(panel.canMove && evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("c")){
             panel.intPX += 1;
             dOn = false;
             System.out.println(panel.intPX);
             System.out.println(panel.ix+","+panel.iy);
+        }
+        if(!panel.canMove){
+            tfreeze.start();
         }
         panel.repaint();
     }
@@ -394,6 +435,10 @@ public class scary implements ActionListener, KeyListener{
         send.addActionListener(this);
         panel.add(send);
 
+        gameoverPanel = new JPanel();
+        gameoverPanel.setLayout(null);
+        gameoverPanel.setPreferredSize(new Dimension(1280,720));
+
         frame.requestFocus();
         frame.addKeyListener(this);
 /*
@@ -402,11 +447,7 @@ public class scary implements ActionListener, KeyListener{
         s1.setBounds(320, 320, 80, 80);
         panel.add(s1);
 */
-        tagb = new JButton("Tag");
-        tagb.setBounds(770,0,100,50);
-        tagb.addActionListener(this);
-        panel.add(tagb);
-      
+        
         frame.setContentPane(startPanel);
         frame.pack();
         frame.setResizable(false);

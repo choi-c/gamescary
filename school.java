@@ -21,6 +21,7 @@ public class school extends JPanel implements ActionListener{
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
     Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
+    Boolean canMove = true;
     int intPflTaken = 0, intPiTaken = 0;
     int intHX, intHY, intSX, intSY;
     Timer thetimer = new Timer(1000/60, this);
@@ -41,15 +42,7 @@ public class school extends JPanel implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent evt){
-        if(evt.getSource() == thetimer){
-            ssm.sendText("game,"+intPX+","+intPY+","+intPflTaken+","+intPiTaken);
-        }else if(evt.getSource() == ssm){
-            
-            if(strNMsg[0] == "game"){
-            
-            
-        }
-        }
+
     }
     /*
     public void xcoord(){
@@ -154,9 +147,21 @@ public class school extends JPanel implements ActionListener{
                                 }else if(strOChar.equals("seeker2")){
                                     g.drawImage(seeker2, intX, intY, 80, 80, null);
                                 }else if(strOChar.equals("hider1")){
-                                    g.drawImage(hider1, intX, intY, 80, 80, null);
+                                    if(strMap[intPY2][intPX2].equals("l")){
+                                        g.drawImage(locker, intX, intY, 80, 80, null);
+                                    }else if(strMap[intPY2][intPX2].equals("d")){
+                                        g.drawImage(desk, intX, intY, 80, 80, null);
+                                    }else{
+                                        g.drawImage(hider1, intX, intY, 80, 80, null);    
+                                    }
                                 }else if(strOChar.equals("hider2")){
-                                    g.drawImage(hider2, intX, intY, 80, 80, null);
+                                    if(strMap[intPY2][intPX2].equals("l")){
+                                        g.drawImage(locker, intX, intY, 80, 80, null);
+                                    }else if(strMap[intPY2][intPX2].equals("d")){
+                                        g.drawImage(desk, intX, intY, 80, 80, null);
+                                    }else{
+                                        g.drawImage(hider2, intX, intY, 80, 80, null);    
+                                    }
                                 }
                             }
                         intX = intX + 80;
@@ -232,10 +237,7 @@ public class school extends JPanel implements ActionListener{
                 System.out.println("Character not selected error"); 
             }
             // freezing player when 
-            try{
-                Thread.sleep(5000);
-            }catch(InterruptedException e){
-            }
+            canMove = false;
         }
 
         // Principal
