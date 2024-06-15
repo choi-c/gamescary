@@ -13,4 +13,7 @@ game,20,20,30,23
 chrSelect,strPH,strSelect
 chrSelect,host,seeker1
 
+connect,strPH,blnConnected
+connect,host,true
+
 - tag button (stop game)

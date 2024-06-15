@@ -34,7 +34,7 @@ public class scary implements ActionListener, KeyListener{
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
     public String strName = null, strMsg = null, strPH = "";
-    boolean blnTyped = false;
+    boolean blnTyped = false, blnConnected = false, blnOConnected = false;
     boolean aOn, sOn, dOn, wOn;
     int intStep = 1;
     String[][] strMap = new String[51][51];
@@ -135,6 +135,11 @@ public class scary implements ActionListener, KeyListener{
             tmenu.stop();
             tcoords.start();
             frame.validate();
+        }
+
+        if(evt.getSource() == timer){
+            String strPX = panel.intPX+"", strPY = panel.intPY+"";
+            ssm.sendText("game,"+strPH+","+ panel.strSelect+","+ strPX+","+ strPY);
         }
 
         if(evt.getSource() == msg){
