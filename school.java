@@ -143,7 +143,7 @@ public class school extends JPanel implements ActionListener{
                                     g.drawImage(flashlight, intX, intY, 80, 80, null);
                                 }
                             }
-                            if(blnPi == false){
+                            if(blnPi == false && blnPiTaken == false){
                                 if(ix == intCol && iy == intRow){
                                     g.drawImage(ice, intX, intY, 80, 80, null);
                                 }

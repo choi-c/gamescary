@@ -137,11 +137,6 @@ public class scary implements ActionListener, KeyListener{
             frame.validate();
         }
 
-        if(evt.getSource() == timer){
-            String strPX = panel.intPX+"", strPY = panel.intPY+"";
-            ssm.sendText("game,"+strPH+","+ panel.strSelect+","+ strPX+","+ strPY);
-        }
-
         if(evt.getSource() == msg){
             strMsg = msg.getText();
         }else if(evt.getSource() == send){
@@ -161,12 +156,12 @@ public class scary implements ActionListener, KeyListener{
                 panel.intPiTaken = 1;
             }
             if(strPH.equals("host")){
-                while(!strMap[panel.fly][panel.flx].equals("f")){
+                while(!panel.strMap[panel.fly][panel.flx].equals("f")){
                     panel.flx = (int)(Math.random()*49+1);
                     panel.fly = (int)(Math.random()*36+1);
                 }
                 // Ice Image
-                while(!strMap[panel.iy][panel.ix].equals("f")){
+                while(!panel.strMap[panel.iy][panel.ix].equals("f")){
                     panel.ix = (int)(Math.random()*49+1);
                     panel.iy = (int)(Math.random()*36+1);
                 }
