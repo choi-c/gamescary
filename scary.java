@@ -165,6 +165,9 @@ public class scary implements ActionListener, KeyListener{
             if(intTimer % 30 == 0){
                 intCD ++;
                 timerLabel.setText("Timer: "+intCD);
+                if(intCD == 180){
+                    frame.setContentPane(gameoverPanel);
+                }
             }
             if(tagging == 1){
                 if(panel.strSelect.equals("seeker1")){
