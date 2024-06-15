@@ -39,7 +39,7 @@ public class scary implements ActionListener, KeyListener{
     boolean aOn, sOn, dOn, wOn;
     int tagging = 0;
     int intStep = 1;
-    int intTimer = 0,intCD = 1;
+    int intTimer = 1,intCD = 1;
     String[][] strMap = new String[51][51];
     String strTimer = "";
     ImageIcon imgS1,imgS2,imgH1,imgH2;
@@ -162,11 +162,9 @@ public class scary implements ActionListener, KeyListener{
         if(evt.getSource() == tcoords){
             intTimer ++;
             System.out.println(intTimer+"");
-            if(intTimer % 60 == 0){
-                //System.out.println("timer is counting");
+            if(intTimer % 30 == 0){
                 intCD ++;
-                timerCD.setText("Timer: "+intCD);
-                //frame.validate();
+                timerLabel.setText("Timer: "+intCD);
             }
             if(tagging == 1){
                 if(panel.strSelect.equals("seeker1")){
