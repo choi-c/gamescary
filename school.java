@@ -3,21 +3,27 @@ import javax.swing.*;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.image.*;
+import java.util.Timer.*;
+import java.awt.event.*;
 
-public class school extends JPanel{
+public class school extends JPanel implements ActionListener{
     // Properties
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall,ice,flashlight,visibility = null;
     String[][] strMap = new String[51][51];
-    int playerX = 5;
-    int playerY = 32;
-    int intPX = 5;
-    int intPY = 32;
+    int playerX = 5,playerX2;
+    int playerY = 32,playerY2;
+    int intPX = 5,intPX2;
+    int intPY = 32,intPY2;
+    String strPH = "";
+    SuperSocketMaster ssm;
     int flx = 1, fly = 1, ix = 1, iy = 1;
     String strBlock, strOChar;
     //int intChoice = gameplay.chrChoice();
     String strSelect = null;
     Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
+    int intPflTaken = 0, intPiTaken = 0;
     int intHX, intHY, intSX, intSY;
+    Timer thetimer = new Timer(1000/60, this);
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -31,6 +37,18 @@ public class school extends JPanel{
             }catch(IOException e){
                 return null;
             }
+        }
+    }
+
+    public void actionPerformed(ActionEvent evt){
+        if(evt.getSource() == thetimer){
+            ssm.sendText("game,"+intPX+","+intPY+","+intPflTaken+","+intPiTaken);
+        }else if(evt.getSource() == ssm){
+            
+            if(strNMsg[0] == "game"){
+            
+            
+        }
         }
     }
     /*
@@ -87,16 +105,9 @@ public class school extends JPanel{
             System.out.println("File not found");
         }
 
-        // Flashlight Image
-        while(!strMap[fly][flx].equals("f")){
-            flx = (int)(Math.random()*49+1);
-            fly = (int)(Math.random()*36+1);
-        }
-        // Ice Image
-        while(!strMap[iy][ix].equals("f")){
-            ix = (int)(Math.random()*49+1);
-            iy = (int)(Math.random()*36+1);
-        }
+        // Power-ups
+        
+        
 
         int intX = 0;
 		int intY = 0;
@@ -137,20 +148,17 @@ public class school extends JPanel{
                                     g.drawImage(ice, intX, intY, 80, 80, null);
                                 }
                             }
-                            if(intHX == intCol && intHY == intRow){
-                                if(strOChar.equals("hider1")){
-                                    g.drawImage(hider1, intX, intY, 80, 80, null);
-                                }else if(strOChar.equals("hider2")){
-                                    g.drawImage(hider2, intX, intY, 80, 80, null);
-                                }
-                            }if(intSX == intCol && intSY == intRow){
+                            if(intPX2 == intCol && intPY2 == intRow){
                                 if(strOChar.equals("seeker1")){
                                     g.drawImage(seeker1, intX, intY, 80, 80, null);
                                 }else if(strOChar.equals("seeker2")){
                                     g.drawImage(seeker2, intX, intY, 80, 80, null);
+                                }else if(strOChar.equals("hider1")){
+                                    g.drawImage(hider1, intX, intY, 80, 80, null);
+                                }else if(strOChar.equals("hider2")){
+                                    g.drawImage(hider2, intX, intY, 80, 80, null);
                                 }
                             }
-                        //}
                         intX = intX + 80;
                         //System.out.println(intX+","+intY);
                     }
@@ -192,7 +200,7 @@ public class school extends JPanel{
         }
 
         // Power-ups
-        if(intPX == flx && intPY == fly  && blnPflTaken == false){
+        if(intPX == flx && intPY == fly  && blnPflTaken == false){    
             blnPfl = true;
             blnPflTaken = true;
             blnVisibility = true;
@@ -239,8 +247,6 @@ public class school extends JPanel{
                 }
             }
         }
-        
-
     }
 
 
@@ -267,6 +273,5 @@ public class school extends JPanel{
         }catch(IOException e){
             System.out.println("Unable to load image");
         }
-
     }
 }

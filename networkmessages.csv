@@ -4,8 +4,11 @@ chat,host,michelle,"hello"
 game,strPH, strSelect, intX, intY
 game,client,seeker2, 12,19
 
-game,item,intX,intY
-game,flashlight,24,31
+game,strSelect,intX,intY,intPflTaken,intPiTaken
+game,24,31,1,1
+
+game,flx,fly,ix,iy
+game,20,20,30,23
 
 chrSelect,strPH,strSelect
 chrSelect,host,seeker1

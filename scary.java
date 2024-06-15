@@ -44,6 +44,7 @@ public class scary implements ActionListener, KeyListener{
     int intCount;
     String strMsgType;
     String strHX,strHY,strSX,strSY;
+    Timer tmenu = new Timer(1000/60, this), tcoords = new Timer(1000/60,this);
 
     SuperSocketMaster ssm;
 
@@ -82,94 +83,57 @@ public class scary implements ActionListener, KeyListener{
             if(!strName.equals(null)){
                 if(!ip.getText().equals("") && !port.getText().equals("")){
                     strPH = "player";
+                    panel.strPH = "player";
                     System.out.println("connect as player");
                     ssm = new SuperSocketMaster(ip.getText(), Integer.parseInt(port.getText()),this);
+                    panel.ssm = ssm;
                     ssm.connect();
+                    char1.setEnabled(false);
+                    char2.setEnabled(false);
                 }else if (ip.getText().equals("") && !port.getText().equals("")){
                     strPH = "host";
                     System.out.println("connect as host");
                     ssm = new SuperSocketMaster(Integer.parseInt(port.getText()),this);
                     ssm.connect();
+                    char3.setEnabled(false);
+                    char4.setEnabled(false);
                 }else{
                     System.out.println("Enter ip, port, or name");
                 }
                 System.out.println(strName);
                 frame.setContentPane(characterPanel);
+                tmenu.start();
                 frame.validate();
             }
         }else if(evt.getSource() == name){
             strName = name.getText();
         }else if(evt.getSource() == char1){
-            if(strPH.equals("player")){
-                char1.setEnabled(false);
-                char2.setEnabled(false);
-            }else if(strPH.equals("host")){
-                char1.setEnabled(false);
-                char2.setEnabled(true);
-                char3.setEnabled(false);
-                char4.setEnabled(false);
-                panel.strSelect = "seeker1";
-            }
-            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            //selectName.setBounds(75,0,200,100);
-            //System.out.println(panel.strSelect);
+            panel.strSelect = "seeker1";
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
-            
         }else if(evt.getSource() == char2){
-            if(strPH.equals("player")){
-                char1.setEnabled(false);
-                char2.setEnabled(false);
-            }else if(strPH.equals("host")){
-                char1.setEnabled(true);
-                char2.setEnabled(false);
-                char3.setEnabled(false);
-                char4.setEnabled(false);
-                panel.strSelect = "seeker2";
-            }
-            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            //selectName.setBounds(380,0,200,100);
-            //System.out.println(panel.strSelect);
+            panel.strSelect = "seeker2";
             panel.intPX = 24;
             panel.intPY = 13;
             frame.validate();
-
         }else if(evt.getSource() == char3){
-            if(strPH.equals("player")){
-                char1.setEnabled(false);
-                char2.setEnabled(false);
-                char3.setEnabled(false);
-                char4.setEnabled(true);
-                panel.strSelect = "hider1";
-            }else if(strPH.equals("host")){
-                char3.setEnabled(false);
-                char4.setEnabled(false);
-            }
-            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            //selectName.setBounds(700,0,200,100);
-            //System.out.println(panel.strSelect);
+            panel.strSelect = "hider1";
+            panel.intPX = 5;
+            panel.intPY = 32;
             frame.validate();
         }else if(evt.getSource() == char4){
-            if(strPH.equals("player")){
-                char1.setEnabled(false);
-                char2.setEnabled(false);
-                char3.setEnabled(true);
-                char4.setEnabled(false);
-                panel.strSelect = "hider2";
-            }else if(strPH.equals("host")){
-                char3.setEnabled(false);
-                char4.setEnabled(false);
-            }
-            //ssm.sendText("chrSelect,"+strPH+","+panel.strSelect);
-            //selectName.setBounds(1020,0,200,100);
-            //System.out.println(panel.strSelect);
+            panel.strSelect = "hider2";
+            panel.intPX = 5;
+            panel.intPY = 32;
             frame.validate();
         }else if(evt.getSource() == lockIn){
             System.out.println("playing as "+panel.strSelect);
             frame.setContentPane(panel);
             frame.requestFocus();
             frame.addKeyListener(this);
+            tmenu.stop();
+            tcoords.start();
             frame.validate();
         }
 
@@ -181,10 +145,37 @@ public class scary implements ActionListener, KeyListener{
             chat.append(strName +": "+ strMsg + "\n");
             frame.requestFocus();
         }
-
+        if(evt.getSource() == tmenu){
+            ssm.sendText("chrSelect,"+panel.strSelect);
+        }
+        if(evt.getSource() == tcoords){
+            if(panel.blnPflTaken){
+                panel.intPflTaken = 1;
+            }
+            if(panel.blnPiTaken){
+                panel.intPiTaken = 1;
+            }
+            if(strPH.equals("host")){
+                while(!strMap[panel.fly][panel.flx].equals("f")){
+                    panel.flx = (int)(Math.random()*49+1);
+                    panel.fly = (int)(Math.random()*36+1);
+                }
+                // Ice Image
+                while(!strMap[panel.iy][panel.ix].equals("f")){
+                    panel.ix = (int)(Math.random()*49+1);
+                    panel.iy = (int)(Math.random()*36+1);
+                }
+            }else{
+                
+            }
+            ssm.sendText("game,"+panel.strSelect+","+panel.intPX+","+panel.intPY+","+panel.intPflTaken+","+panel.intPiTaken+","+panel.flx+","+panel.fly+","+panel.ix+","+panel.iy);
+        }
         if(evt.getSource() == ssm){
             String[] strNMsg = ssm.readText().split(",");
             if(strNMsg[0].equals("chrSelect")){
+                String[] strPlayerChoice = ssm.readText().split(",");
+                panel.strOChar = strPlayerChoice[1];
+                /*
                 if(strNMsg[1].equals("host")){
                     if(strNMsg[2].equals("seeker1")){
                         char1.setEnabled(false);
@@ -206,27 +197,25 @@ public class scary implements ActionListener, KeyListener{
                         char4.setEnabled(false);
                     }
                 }
-            }else if(strNMsg[0].equals("game")){
-                panel.strOChar = strNMsg[2];
-                if(strNMsg[1].equals("host")){
-                    if(strNMsg[2].equals("seeker1") || strNMsg[2].equals("seeker2")){
-                        panel.intSX = Integer.parseInt(strSX);
-                        panel.intSY = Integer.parseInt(strSY);
-                    }else if(strNMsg[2].equals("hider1") || strNMsg[2].equals("hider2")){
-                        panel.intHX = Integer.parseInt(strHX);
-                        panel.intHY = Integer.parseInt(strHY);
-                    }
-                }else if(strNMsg[1].equals("client")){
-                    if(strNMsg[2].equals("seeker1") || strNMsg[2].equals("seeker2")){
-                        panel.intSX = Integer.parseInt(strSX);
-                        panel.intSY = Integer.parseInt(strSY);
-                    }else if(strNMsg[2].equals("hider1") || strNMsg[2].equals("hider2")){
-                        panel.intHX = Integer.parseInt(strHX);
-                        panel.intHY = Integer.parseInt(strHY);
-                    }
-                }
+                     */
             }else if(strNMsg[0].equals("chat")){
                 chat.append(strNMsg[2] +": "+ strNMsg[3] + "\n");
+            }else if(strNMsg[0].equals("game")){
+                panel.strOChar = strNMsg[1];
+                panel.intPX2 = Integer.parseInt(strNMsg[2]);
+                panel.intPY2 = Integer.parseInt(strNMsg[3]);
+                if(Integer.parseInt(strNMsg[4]) == 1){
+                    panel.blnPflTaken = true;
+                }
+                if(Integer.parseInt(strNMsg[5]) == 1){
+                    panel.blnPiTaken = true;
+                }
+                if(strPH == "player"){
+                    panel.flx = Integer.parseInt(strNMsg[6]);
+                    panel.fly = Integer.parseInt(strNMsg[7]);
+                    panel.ix = Integer.parseInt(strNMsg[8]);
+                    panel.iy = Integer.parseInt(strNMsg[9]);
+                }
             }
         }
     }
@@ -248,25 +237,21 @@ public class scary implements ActionListener, KeyListener{
             sOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'w' && wOn && !panel.strMap[panel.intPY - 1][panel.intPX].equals("w") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("s") && !panel.strMap[panel.intPY - 1][panel.intPX].equals("c")){
             panel.intPY -= 1;
             wOn = false;
             System.out.println(panel.ix+","+panel.iy);
             System.out.println(panel.intPY);
-            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'a' && aOn && !panel.strMap[panel.intPY][panel.intPX - 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX - 1].equals("c")){
             panel.intPX -= 1;
             System.out.println(panel.intPX);
             aOn = false;
             System.out.println(panel.ix+","+panel.iy);
-            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }else if(evt.getKeyChar() == 'd' && dOn && !panel.strMap[panel.intPY][panel.intPX + 1].equals("w") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("s") && !panel.strMap[panel.intPY][panel.intPX + 1].equals("c")){
             panel.intPX += 1;
             dOn = false;
             System.out.println(panel.intPX);
             System.out.println(panel.ix+","+panel.iy);
-            ssm.sendText("game,"+strPH+","+panel.strSelect+","+panel.intPX+","+panel.intPY);
         }
         panel.repaint();
     }
