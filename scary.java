@@ -31,7 +31,7 @@ public class scary implements ActionListener, KeyListener{
     characterselect characterPanel;
     JButton connectb,tagb, helpb;
     JTextField ip = null,port = null,name = null, msg = new JTextField("Send Message");
-    JLabel seekers,hiders, selectName;
+    JLabel seekers,hiders, selectName,timerLabel,timerCD;
     JButton char1,char2,char3,char4, lockIn,send;
     JButton next, continueb, back;
     public String strName = null, strMsg = null, strPH = "";
@@ -39,14 +39,17 @@ public class scary implements ActionListener, KeyListener{
     boolean aOn, sOn, dOn, wOn;
     int tagging = 0;
     int intStep = 1;
+    int intTimer = 0,intCD = 1;
     String[][] strMap = new String[51][51];
+    String strTimer = "";
     ImageIcon imgS1,imgS2,imgH1,imgH2;
     JLabel s1,s2,h1,h2;
     String[] strSplit;
     int intCount;
     String strMsgType;
     String strHX,strHY,strSX,strSY;
-    Timer tmenu = new Timer(1000/60, this), tcoords = new Timer(1000/60,this), tfreeze = new Timer(5000,this);
+    Timer tmenu = new Timer(1000/60, this), tcoords = new Timer(1000/60,this), tfreeze = new Timer(5000,this), tgame = new Timer(1000,this);
+    boolean blnTimer = false;
 
     SuperSocketMaster ssm;
 
@@ -157,6 +160,14 @@ public class scary implements ActionListener, KeyListener{
             ssm.sendText("chrSelect,"+panel.strSelect);
         }
         if(evt.getSource() == tcoords){
+            intTimer ++;
+            System.out.println(intTimer+"");
+            if(intTimer % 60 == 0){
+                //System.out.println("timer is counting");
+                intCD ++;
+                timerCD.setText("Timer: "+intCD);
+                //frame.validate();
+            }
             if(tagging == 1){
                 if(panel.strSelect.equals("seeker1")){
                     if(panel.intPY == panel.intPY2 && panel.intPX == panel.intPX2){
@@ -197,6 +208,15 @@ public class scary implements ActionListener, KeyListener{
             panel.repaint();
             ssm.sendText("game,"+panel.strSelect+","+panel.intPX+","+panel.intPY+","+panel.intPflTaken+","+panel.intPiTaken+","+panel.flx+","+panel.fly+","+panel.ix+","+panel.iy+","+tagging);
         }
+        /*
+        if(evt.getSource() == tgame){
+            intTimer ++;
+            strTimer = intTimer+"";
+            System.out.println("timer: "+strTimer);
+            timerCD.setText("Timer: "+strTimer);
+            frame.validate();
+        }
+        */
         if(evt.getSource() == ssm){
             String[] strNMsg = ssm.readText().split(",");
             if(strNMsg[0].equals("chrSelect")){
@@ -434,6 +454,11 @@ public class scary implements ActionListener, KeyListener{
         send.setBounds(920,670,360,50);
         send.addActionListener(this);
         panel.add(send);
+
+        //timerCD.setText("0");
+        timerLabel = new JLabel("Time Remaining: 0");
+        timerLabel.setBounds(750,100,150,50);
+        panel.add(timerLabel);
 
         gameoverPanel = new JPanel();
         gameoverPanel.setLayout(null);
