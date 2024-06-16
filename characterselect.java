@@ -11,14 +11,17 @@ import java.awt.image.*;
 
 public class characterselect extends JPanel{
     // Properties
+    /**
+     * These images are used as icons, which show users which character they have selected
+     */
     BufferedImage hider1,hider2,seeker1,seeker2 = null;
 
     // Methods
     /**
-    * Reads image and gets the input stream from inside of the JAR File
-    * @param strFileName the name of the file being read
-    * @return image information, or null if the image cannot be read
-    */
+     * Reads image and gets the input stream from inside of the JAR File
+     * @param strFileName the name of the file being read
+     * @return image information, or null if the image cannot be read
+     */
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);
@@ -34,9 +37,9 @@ public class characterselect extends JPanel{
     }
 
     /**
-    * Paints the character icons in the character select screen
-    * @param g the graphics object
-    */
+     * Paints the character icons in the character select screen
+     * @param g the graphics object
+     */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.drawImage(seeker1, 75, 133, 200, 267, null);
@@ -46,6 +49,9 @@ public class characterselect extends JPanel{
     }
 
     // Constructor
+    /**
+     * Constructor for the character select screen. Loads all the necessary images.
+     */
     public characterselect(){
         super();
         try{

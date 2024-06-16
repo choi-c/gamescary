@@ -6,25 +6,63 @@ import java.awt.image.*;
 import java.util.Timer.*;
 import java.awt.event.*;
 
-public class school extends JPanel implements ActionListener{
+public class school extends JPanel{
     // Properties
+    /**
+     * These images make up the visual aspects of the game
+     * All of these correspond to a certain part of the game map and are read on the array
+     */
     BufferedImage hider1,hider2,chair,floor,gym,locker,pillar,principal,seeker1,seeker2,desk,wall,ice,flashlight,visibility = null;
+    /**
+     * This 2D array is used to load the map
+     * the map is used to print the map, and to control interactions between the player and map
+     * it reads from the map csv file
+     */
     String[][] strMap = new String[51][51];
-    int playerX = 5,playerX2;
-    int playerY = 32,playerY2;
+    /**
+     * these integers are the X coordinates of the user and the other user on the map
+     */
     int intPX = 5,intPX2;
+    /**
+     * these integers are the Y coordinates of the user and the other user on the map
+     */
     int intPY = 32,intPY2;
+    /**
+     * this string tells the code whether the user is the host or the client
+     */
     String strPH = "";
+    /**
+     * this is the Super Socket Master Object, used for network communication
+     */
     SuperSocketMaster ssm;
+    /** 
+     * these integers are the x and y coordinates of the power ups, that are randomly generated
+     * the integers are used to show where the power ups are on the map
+     * flx and fly are used for the flashlight and ix and iy are used for the ice
+     */
     int flx = 1, fly = 1, ix = 1, iy = 1;
+    /**
+     * this string is used to store data on what character other player chose and what block they're standing on
+     */
     String strBlock, strOChar;
-    //int intChoice = gameplay.chrChoice();
+    /**
+     * this string is used to store data to show what you chose
+     */
     String strSelect = null;
+    /**
+     * these booleans control whether the flashlight or ice have already been used
+     * they prevent power-ups from being used over and over
+     * they also help users from having the same power ups at the same time
+     */
     Boolean blnVisibility = false, blnPi = false, blnPfl = false, blnPflTaken = false,blnPiTaken = false;
+    /**
+     * this boolean is only used to stop the player from moving when the ice is active
+     */
     Boolean canMove = true;
+    /**
+     * this integer is used to tell the other player whether the flashlight and ice have been taken
+     */
     int intPflTaken = 0, intPiTaken = 0;
-    int intHX, intHY, intSX, intSY;
-    Timer thetimer = new Timer(1000/60, this);
 
     // Methods
     public BufferedImage loadImage(String strFileName){
@@ -41,29 +79,12 @@ public class school extends JPanel implements ActionListener{
         }
     }
 
-    public void actionPerformed(ActionEvent evt){
-
-    }
-    /*
-    public void xcoord(){
-        // if player is a seeker, specify coords as seeker coords (x-coordinate)
-        if(strSelect.equals("seeker1") || strSelect.equals("seeker2")){
-            intPX = intSX;
-        }else{
-            intPX = intHX;
-        }
-    }
-    public void ycoord(){
-        // if player is a seeker, specify x-coord as seeker coords
-        if(strSelect.equals("seeker1") || strSelect.equals("seeker2")){
-            intPY = intSY;
-        }else{
-            intPY = intHY;
-        }
-    }
-        */
-
-    
+    /**
+     * paints gameplay onto the JFrame
+     * csv map file is turned into an array, which is read when printing the the map
+     * portions of the map are printed based on the player x and y position
+     * also prints game mechanics: power-ups and hiding
+     */
     // painting the map
     public void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -98,10 +119,7 @@ public class school extends JPanel implements ActionListener{
             System.out.println("File not found");
         }
 
-        // Power-ups
-        
-        
-
+        // regularly prints out a 7x7 grid that updates based on the location of the player
         int intX = 0;
 		int intY = 0;
 		for(intRow = 0; intRow < 38; intRow++){
@@ -253,6 +271,9 @@ public class school extends JPanel implements ActionListener{
 
 
     // Constructor
+    /**
+     * Constructor for the gameplay layout. Loads all the necessary images that will be printed as a part of the map.
+     */
     public school(){
         super();
         try{

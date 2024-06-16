@@ -9,19 +9,27 @@ import java.awt.image.*;
 * Extension of a JPanel
 */
 
-
 public class help extends JPanel{
     // Properties
+
+    /**
+    * These images provide guidance to players on how to play the game
+    * They are observed as a series of slideshows
+    */
     BufferedImage help1,help2,help3, help4, help5 = null;
+
+    /**
+    * This integer tells the program which page of the help page to display
+    * It changes when a button is clicked
+    */
     int intPage = 1;
 
     // Methods
-
     /**
-    * Prints all the necessary images for the help screen
-    * @param g the graphics object
-    */
-
+     * Reads image and gets the input stream from inside of the JAR File
+     * @param strFileName the name of the file being read
+     * @return image information, or null if the image cannot be read
+     */
     public BufferedImage loadImage(String strFileName){
         InputStream imageclass = null;
         imageclass = this.getClass().getResourceAsStream(strFileName);
@@ -35,6 +43,10 @@ public class help extends JPanel{
             }
         }
     }
+     /**
+      * Prints all the necessary images for the help screen
+      * @param g the graphics object
+      */
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         if(intPage == 1){
@@ -51,6 +63,9 @@ public class help extends JPanel{
     }
 
     // Constructor
+    /**
+     * Constructor for the help screen. Loads all the necessary images.
+     */
     public help(){
         try{
             help1 = ImageIO.read(new File("help1.png"));
