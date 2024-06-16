@@ -464,7 +464,7 @@ public class scary implements ActionListener, KeyListener{
         timerLabel.setBounds(750,100,150,50);
         panel.add(timerLabel);
 
-        gameoverPanel = new JPanel();
+        gameoverPanel = new gameover();
         gameoverPanel.setLayout(null);
         gameoverPanel.setPreferredSize(new Dimension(1280,720));
 
