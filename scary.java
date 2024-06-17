@@ -346,6 +346,7 @@ public class scary implements ActionListener, KeyListener{
         }
         if(evt.getSource() == tagb){
             tagging = 1;
+            frame.requestFocus();
         }
     }
 
